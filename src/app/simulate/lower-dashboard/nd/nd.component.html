@@ -1,0 +1,26 @@
+<div #ndDiv id="ndDiv" (window:resize)="onResize($event)">
+    <canvas #ndBackground></canvas>
+    <canvas #ndForeground></canvas>
+
+    <!-- Displays -->
+    <div class='guage' id='gnd_spd'> {{ localMemory.gnd_spd }} </div>
+    <div class='guage' id='true_as'> {{ localMemory.true_as }} </div>
+    <div class='guage' id='wind_dir_at_ac'> {{ localMemory.wind_dir_at_ac }}<span>&#176;</span></div>
+    <div class='guage' id='wind_spd_at_ac'> {{ localMemory.wind_spd_at_ac }} </div>
+    <div class='guage' id='mag_track_angle'> {{ localMemory.mag_track_angle | number: '1.0-0' }} </div>
+    <div class='guage' id='hdg_angle'> {{ localMemory.hdg_angle | number: '1.0-1'}} </div>
+    <div class='guage' id='mag_hdg_angle'> {{ localMemory.mag_hdg_angle | number: '1.0-1' }} </div>
+    <div class='guage' id='lat' [style.display]='localMemory.fo_vsd_on ? "none" : "block"'> {{ localMemory.lat | number: '1.0-1' }} </div>
+    <div class='guage' id='long' [style.display]='localMemory.fo_vsd_on ? "none" : "block"'> {{ localMemory.long | number: '1.0-1' }} </div>
+
+    <div class='guage' id='fo_ef_nd_mode'> {{ this.stringifyNDMode(localMemory.fo_ef_nd_mode) }} </div>
+    <div class='guage' id='fo_ef_rnge'> {{ localMemory.fo_ef_rnge }} </div>
+
+
+     <!-- Indicators -->
+     <div class='indicator' id='fo_bel_gs_lt' [style.display]='localMemory.fo_bel_gs_lt ? "block" : "none"'>BELOW G/S</div>
+     <div class='indicator' id='wind_dir_at_ac_arrow' [style.transform]="'rotate(' + (localMemory.wind_dir_at_ac) + 'deg)'">↓</div>
+
+    <!-- Vertical Situation Display Image -->
+    <div id="vsd" [style.display]='localMemory.fo_vsd_on ? "block" : "none"'></div>
+</div>

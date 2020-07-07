@@ -1,0 +1,211 @@
+canvas {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+}
+
+#ndDiv {
+    position: absolute;
+    left: 1%;
+    top: 2%;
+
+    width: 48.5%;
+    height: 96%;
+
+    background-color: black;
+    border: 1px solid black;
+}
+
+#vsd {
+    position: absolute;
+    left: 17.5%;
+    top: 59%;
+
+    width: 65%;
+    height: 40%;
+    
+    border: 1px solid white;
+    background-image: url('~/assets/img/vsd.png');
+    background-size: 100% 100%;
+}
+
+/* #### GUAGES #### */
+.guage {
+    font-family: Arial;
+    float: left;
+    text-align: left;
+
+    border: none;
+
+    background-color: transparent;
+}
+
+#gnd_spd {
+    position: absolute;
+    left: 7%;
+    top: 0.8%;
+
+    width: 10.5%;
+    height: 6%;
+
+    font-size: 2vh;
+    color: rgb(244, 184, 255);
+}
+
+#true_as {
+    position: absolute;
+    left: 24%;
+    top: 0.8%;
+
+    width: 10.5%;
+    height: 6%;
+
+    font-size: 2vh;
+    color: rgb(244, 184, 255);
+}
+
+#wind_dir_at_ac {
+    position: absolute;
+    left: 2%;
+    top: 5.5%;
+
+    width: 10.5%;
+    height: 6%;
+
+    font-size: 1.8vh;
+    color: rgb(90, 252, 3);
+}
+
+#wind_spd_at_ac {
+    position: absolute;
+    left: 19%;
+    top: 5.5%;
+
+    width: 10.5%;
+    height: 6%;
+
+    font-size: 1.8vh;
+    color: rgb(90, 252, 3);
+}
+
+#mag_track_angle {
+    position: absolute;
+    left: 41%;
+    top: -1%;
+
+    width: 17.5%;
+    height: 9%;
+
+    font-size: 4vh;
+    color: white;
+    text-align: center;
+}
+
+#hdg_angle {
+    position: absolute;
+    left: 64.5%;
+    top: 10.8%;
+
+    width: 10%;
+    height: 6%;
+
+    font-size: 2vh;
+    color: white;
+    text-align: center;
+}
+
+#mag_hdg_angle {
+    position: absolute;
+    left: 75.5%;
+    top: 11.5%;
+
+    width: 10%;
+    height: 6%;
+
+    font-size: 2vh;
+    color: rgb(90, 252, 3);
+}
+
+#lat {
+    position: absolute;
+    left: 66.5%;
+    top: 79%;
+
+    width: 10%;
+    height: 6%;
+
+    font-size: 2vh;
+    color: rgb(90, 252, 3);
+}
+
+#long {
+    position: absolute;
+    left: 66.5%;
+    top: 84.5%;
+
+    width: 10%;
+    height: 6%;
+
+    font-size: 2vh;
+    color: rgb(90, 252, 3);
+}
+
+#fo_ef_nd_mode {
+    position: absolute;
+    left: 1%;
+    top: 83%;
+
+    width: 13%;
+    height: 7%;
+
+    font-size: 2.2vh;
+    color: rgb(90, 252, 3);
+}
+
+#fo_ef_rnge {
+    position: absolute;
+    left: 1%;
+    top: 89%;
+
+    width: 13%;
+    height: 7%;
+
+    font-size: 2.2vh;
+    color: rgb(90, 252, 3);
+}
+
+/* #### INDICATORS #### */
+.indicator {
+    font-family: Arial;
+    float: left;
+    text-align: left;
+
+    border: 1px solid white;
+    border: none;
+
+    background-color: transparent;
+}
+
+#fo_bel_gs_lt {
+    position: absolute;
+    left: 84%;
+    top: 90%;
+
+    width: 15%;
+    height: 5%;
+
+    font-size: 1.7vh;
+    color: rgb(90, 252, 3);
+}
+
+#wind_dir_at_ac_arrow {
+    position: absolute;
+    left: 6%;
+    top: 11.5%;
+
+    width: 2.5%;
+    height: 6%;
+
+    font-size: 2.5vh;
+    color: rgb(90, 252, 3);
+}

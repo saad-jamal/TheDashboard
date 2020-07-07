@@ -1,0 +1,65 @@
+body {
+    font-family: 'Times New Roman';
+}
+
+div  {
+    background-color: grey;
+    border: 1px solid #404040;
+}
+
+#overDashboard {
+    position: absolute;
+    left: 12.5%;
+    top: 1%;
+
+    width: 87%;
+    height: 19%;
+}
+
+#upperDashboard {
+    position: absolute;
+    left: 12.5%;
+    top: 20.5%;
+
+    width: 87%;
+    height: 19.5%;
+}
+
+#eicasDisplays {
+    position: absolute;
+    left: 12.5%;
+    top: 40.5%;
+
+    width: 18%;
+    height: 58.5%;
+}
+
+#fmsDisplay {
+    position: absolute;
+    left: 31%;
+    top: 57%;
+
+    width: 14%;
+    height: 42%
+}
+
+#lowerDashboard {
+    position: absolute;
+    left: 45.5%;
+    top: 40.5%;
+
+    width: 54%;
+    height: 47.5%;
+}
+
+#controllerDiv {
+    position: absolute;
+    left: 45.5%;
+    top: 88.5%;
+
+    width: 54%;
+    height: 10.5%;
+
+    background-color: white;
+    border: 1px solid black;
+}

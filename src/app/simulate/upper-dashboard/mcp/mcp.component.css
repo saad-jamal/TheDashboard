@@ -1,0 +1,221 @@
+#mcpDiv {
+    position: absolute;
+    left: 0.5%;
+    top: 2.5%;
+
+	width: 81%;
+	height: 95%;
+	
+	background-image: url('~/assets/img/mcp_back.jpeg');
+    background-size: 100% 100%;
+
+    border: 1px solid black;
+    
+    font-family: 'Segment7';
+    color: white;
+}
+
+/* #### GUAGES #### */
+.guage {
+	font-family: "Segment7";
+	font-size: 2.1vh; /* SHOULD BE 1.3vw || 1.6vw */
+    color: white;
+    float: left;
+	text-align: right;
+    
+    border: 1px solid white;
+    border: none;
+
+    background-color: transparent;
+}
+
+#mcp_crs_1_ds {
+    position: absolute;
+    left: 1.6%;
+    top: 16%;
+
+    width: 5.4%;
+    height: 14%;
+}
+
+#mcp_ias_mach_ds {
+    position: absolute;
+    left: 20.7%;
+    top: 16%;
+
+    width: 6.8%;
+    height: 14%;
+}
+
+#mcp_hdg_ds {
+    position: absolute;
+    left: 37.2%;
+    top: 16%;
+
+    width: 5.4%;
+    height: 14%;
+}
+
+#mcp_alt_ds {
+    position: absolute;
+    left: 51.7%;
+    top: 16%;
+
+    width: 8.8%;
+    height: 14%;
+}
+
+#mcp_vert_spd_ds {
+    position: absolute;
+    left: 64.8%;
+    top: 16%;
+
+    width: 8.5%;
+    height: 14%;
+}
+
+#mcp_crs_2_ds {
+    position: absolute;
+    left: 93%;
+    top: 16%;
+
+    width: 5%;
+    height: 14%;
+}
+
+/* #### SWITCHES #### */
+.switch {
+    background-image: url('~/assets/img/switch.png');
+    background-color: transparent;
+    border: none;
+
+	width: 4.4%;
+    height: 55%;
+    
+	background-size: 100% 100%;
+
+	transform: rotate(180deg);
+}
+
+.switch.on {
+	transform: rotate(0deg);
+}
+
+.small {
+    width: 3%;
+    height: 36%;
+}
+
+#mcp_at_arm {
+    position: absolute;
+    left: 12.1%;
+    top: 4.5%;
+}
+
+#mcp_fd_1 {
+    position: absolute;
+    left: 6.2%;
+    top: 63%;
+}
+
+#mcp_fd_2 {
+    position: absolute;
+    left: 90.9%;
+    top: 63%
+}
+
+/* #### BUTTONS #### */
+.button {
+    background-image: url('~/assets/img/button-on.png');
+    background-color: transparent;
+    border: none;
+
+	width: 3.7%;
+    height: 16%;
+    
+	background-size: 100% 100%;
+}
+
+#mcp_n1 {
+    position: absolute;
+    left: 10.2%;
+    top: 79%;
+}
+
+#mcp_spd {
+    position: absolute;
+    left: 16.3%;
+    top: 79%;
+}
+
+#mcp_lvl_spd {
+    position: absolute;
+    left: 30.2%;
+    top: 79%;
+}
+
+#mcp_hdg_sel {
+    position: absolute;
+    left: 38.1%;
+    top: 79%;
+}
+
+#mcp_vnav {
+    position: absolute;
+    left: 30.5%;
+    top: 15%;
+}
+
+#mcp_lnav {
+    position: absolute;
+    left: 45.5%;
+    top: 15%;
+}
+
+#mcp_vor_loc {
+    position: absolute;
+    left: 45.5%;
+    top: 47%;
+}
+
+#mcp_apprh {
+    position: absolute;
+    left: 45.5%;
+    top: 79%;
+}
+
+#mcp_alt_hld {
+    position: absolute;
+    left: 54.2%;
+    top: 79%;
+}
+
+#mcp_vert_spd {
+    position: absolute;
+    left: 61%;
+    top: 79%;
+}
+
+#mcp_cmd_a {
+    position: absolute;
+    left: 76.2%;
+    top: 19%;
+}
+
+#mcp_cmd_b {
+    position: absolute;
+    left: 85.2%;
+    top: 19%;
+}
+
+#mcp_cws_a {
+    position: absolute;
+    left: 76.2%;
+    top: 46.5%;
+}
+
+#mcp_cws_b {
+    position: absolute;
+    left: 85.2%;
+    top: 46.5%;
+}

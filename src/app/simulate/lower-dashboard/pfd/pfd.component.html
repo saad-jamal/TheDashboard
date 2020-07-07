@@ -1,0 +1,35 @@
+<div #pfdDiv id="pfdDiv" (window:resize)="onResize($event)">
+    <canvas #pfdBackground></canvas>
+    <canvas #pfdForeground></canvas>
+
+    <!-- Displays -->
+    <div class='guage' id='at_eng_mode'> {{ localMemory.at_eng_mode }} </div>
+
+    <div class='guage' id='fo_roll_eng'> {{ localMemory.fo_roll_eng }} </div>
+    <div class='guage' id='fo_roll_arm'> {{ localMemory.fo_roll_arm }} </div>
+
+    <div class='guage' id='fo_pit_eng'> {{ localMemory.fo_pit_eng }} </div>
+    <div class='guage' id='fo_pit_arm'> {{ localMemory.fo_pit_arm }} </div>
+
+    <div class='guage' id='fo_cws_roll' [style.display]='localMemory.fo_cws_roll ? "block" : "none"'>CWS R</div>
+    <div class='guage' id='fo_cws_pit' [style.display]='localMemory.fo_cws_pit ? "block" : "none"'>CWS P</div>
+
+    <div class='guage' id='mcp_ias_mach_ds'> {{ localMemory.mcp_ias_mach_ds }} </div>
+
+    <div class='guage' id='cal_as'> {{ localMemory.cal_as }} </div>
+
+    <div class='guage' id='mcp_alt_ds'> {{ localMemory.mcp_alt_ds }} </div>
+
+    <div class='guage' id='fo_ef_baro_cur'> {{ calculateBaroPressure() }} </div>
+    <div class='guage' id='baro_units'>IN.</div>
+
+    <div class='guage' id='pres_alt'> {{ calculateRevisedAltitude() }} </div>
+
+    <div id='altimeter_ticker_hatch' [style.display]='displayHatch() ? "block" : "none"'></div>
+
+    <div class ='guage' id='mcp_vert_spd_ds'> {{ localMemory.mcp_vert_spd_ds }} </div>
+
+    <div class='guage' id='fo_ap_stat'> {{ localMemory.fo_ap_stat }} </div>
+
+
+</div>

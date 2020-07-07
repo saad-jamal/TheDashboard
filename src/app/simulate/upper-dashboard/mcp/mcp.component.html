@@ -1,0 +1,31 @@
+<div #mcpDiv id="mcpDiv">
+    <!-- Displays -->
+    <div class='guage' id='mcp_crs_1_ds'> {{ localMemory.mcp_crs_1_ds }}</div>
+    <div class='guage' id='mcp_ias_mach_ds'> {{ localMemory.mcp_ias_mach_ds }} </div>
+    <div class='guage' id='mcp_hdg_ds'> {{ localMemory.mcp_hdg_ds }} </div>
+    <div class='guage' id='mcp_alt_ds'> {{ localMemory.mcp_alt_ds }} </div>
+    <div class='guage' id='mcp_vert_spd_ds'> {{ localMemory.mcp_vert_spd_ds }} </div>
+    <div class='guage' id='mcp_crs_2_ds'> {{ localMemory.mcp_crs_2_ds }}</div>
+
+    <!-- Switches -->
+    <div class='switch' [class.on]='localMemory.mcp_at_arm' id='mcp_at_arm'></div>
+
+    <div class='switch small' [class.on]='localMemory.mcp_fd_1' id='mcp_fd_1'></div>
+    <div class='switch small' [class.on]='localMemory.mcp_fd_2' id='mcp_fd_2'></div>
+    
+    <!-- Buttons -->
+    <div class='button' [style.display]='localMemory.mcp_n1 ? "block" : "none"' id='mcp_n1'></div>
+    <div class='button' [style.display]='localMemory.mcp_spd ? "block" : "none"' id='mcp_spd'></div>
+    <div class='button' [style.display]='localMemory.mcp_lvl_spd ? "block" : "none"' id='mcp_lvl_spd'></div>
+    <div class='button' [style.display]='localMemory.mcp_vnav ? "block" : "none"' id='mcp_vnav'></div>
+    <div class='button' [style.display]='localMemory.mcp_lnav ? "block" : "none"' id='mcp_lnav'></div>
+    <div class='button' [style.display]='localMemory.mcp_vor_loc ? "block" : "none"' id='mcp_vor_loc'></div>
+    <div class='button' [style.display]='localMemory.mcp_apprh ? "block" : "none"' id='mcp_apprh'></div>
+    <div class='button' [style.display]='localMemory.mcp_hdg_sel ? "block" : "none"' id='mcp_hdg_sel'></div>
+    <div class='button' [style.display]='localMemory.mcp_alt_hld ? "block" : "none"' id='mcp_alt_hld'></div>
+    <div class='button' [style.display]='localMemory.mcp_vert_spd ? "block" : "none"' id='mcp_vert_spd'></div>
+    <div class='button' [style.display]='localMemory.mcp_cmd_a ? "block" : "none"' id='mcp_cmd_a'></div>
+    <div class='button' [style.display]='localMemory.mcp_cmd_b ? "block" : "none"' id='mcp_cmd_b'></div>
+    <div class='button' [style.display]='localMemory.mcp_cws_a ? "block" : "none"' id='mcp_cws_a'></div>
+    <div class='button' [style.display]='localMemory.mcp_cws_b ? "block" : "none"' id='mcp_cws_b'></div>
+</div>

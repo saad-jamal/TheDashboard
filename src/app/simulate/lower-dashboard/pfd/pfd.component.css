@@ -1,0 +1,235 @@
+canvas {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+}
+
+#pfdDiv {
+    position: absolute;
+    left: 50.5%;
+    top: 2%;
+
+    width: 48.5%;
+    height: 96%;
+
+    background-color: black;
+    border: 1px solid black;
+}
+
+/* #### GUAGES #### */
+.guage {
+    font-family: Arial;
+    float: left;
+    text-align: left;
+
+    border: none;
+    /* border: 1px solid white; */
+
+    background-color: transparent;
+}
+
+#at_eng_mode {
+    position: absolute;
+    left: 17%;
+    top: 1%;
+
+    width: 17%;
+    height: 5%;
+
+    font-size: 1.6vh;
+    color: rgb(90, 252, 3);
+}
+
+#fo_roll_eng {
+    position: absolute;
+    left: 37%;
+    top: 1%;
+
+    width: 17%;
+    height: 5%;
+
+    font-size: 1.6vh;
+    color: rgb(90, 252, 3);
+}
+
+#fo_roll_arm {
+    position: absolute;
+    left: 37%;
+    top: 6%;
+
+    width: 17%;
+    height: 4%;
+
+    font-size: 1.2vh;
+    color: white;
+}
+
+#fo_pit_eng {
+    position: absolute;
+    left: 58%;
+    top: 1%;
+
+    width: 17%;
+    height: 5%;
+
+    font-size: 1.6vh;
+    color: rgb(90, 252, 3);
+}
+
+#fo_pit_arm {
+    position: absolute;
+    left: 58%;
+    top: 6%;
+
+    width: 17%;
+    height: 5%;
+
+    font-size: 1.2vh;
+    color: white;
+}
+
+#fo_cws_roll {
+    position: absolute;
+    left: 36%;
+    top: 10.5%;
+
+    width: 9%;
+    height: 3%;
+
+    font-size: 1vh;
+    color: #AD8200
+}
+
+#fo_cws_pit {
+    position: absolute;
+    left: 46%;
+    top: 10.5%;
+
+    width: 9%;
+    height: 3%;
+
+    font-size: 1vh;
+    color: #AD8200
+}
+
+#mcp_ias_mach_ds {
+    position: absolute;
+    left: 2.2%;
+    top: 0%;
+
+    width: 13%;
+    height: 7%;
+
+    font-size: 2.4vh;
+    color: #E357FF;
+
+    text-align: center;
+}
+
+#mcp_alt_ds {
+    position: absolute;
+    left: 77%;
+    top: 0%;
+
+    width: 13%;
+    height: 7%;
+
+    font-size: 2.4vh;
+    color: #E357FF;
+    
+    text-align: center;
+}
+
+#cal_as {
+    position: absolute;
+    left: 0%;
+    top: 44%;
+
+    width: 10.5%;
+    height: 7%;
+
+    font-size: 2.5vh;
+    color: white;
+
+    text-align: center;
+}
+
+#pres_alt {
+    position: absolute;
+    left: 79%;
+    top: 44%;
+
+    width: 16%;
+    height: 7%;
+
+    font-size: 2.5vh;
+    color: white;
+
+    text-align: right;
+}
+
+#baro_units {
+    position: absolute;
+    left: 88%;
+    top: 90.5%;
+
+    width: 4%;
+    height: 4%;
+
+    font-size: 1.3vh;
+    color: rgb(90, 252, 3);
+}
+
+#fo_ef_baro_cur {
+    position: absolute;
+    left: 76%;
+    top: 89%;
+
+    width: 11%;
+    height: 5%;
+
+    font-size: 2vh;
+    color: rgb(90, 252, 3);
+}
+
+#mcp_vert_spd_ds {
+    position: absolute;
+    left: 92%;
+    top: 11.5%;
+
+    width: 7%;
+    height: 4%;
+
+    font-size: 1.2vh;
+    color: #E357FF;
+
+    /* border: 1px solid white; */
+}
+
+#fo_ap_stat {
+    position: absolute;
+    left: 35%;
+    top: 13.5%;
+
+    width: 18%;
+    height: 8%;
+
+    font-size: 2.8vh;
+    color: rgb(90, 252, 3);
+
+
+    text-align: center;
+}
+
+/* #### IMAGES #### */
+#altimeter_ticker_hatch {
+    position: absolute;
+    left: 80%;
+    top: 46%;
+
+    width: 3%;
+    height: 4%;
+
+    background-image: url('~/assets/img/hatch.png');
+    background-size: 100% 100%;
+}
