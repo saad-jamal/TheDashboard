@@ -217,7 +217,49 @@ canvas {
     font-size: 2.8vh;
     color: rgb(90, 252, 3);
 
+    text-align: center;
+}
 
+#radio_alt {
+    position: absolute;
+    left: 39.5%;
+    top: 80%;
+
+    width: 9.5%;
+    height: 3.4%;
+
+    font-size: 1.4vh;
+    line-height: 1.4vh;
+    color: rgb(90, 252, 3);
+
+    /* border: 1px solid white; */
+
+    text-align: center;
+}
+
+#mcp_hdg_ds {
+    position: absolute;
+    left: 32%;
+    top: 96%;
+
+    width: 9.5%;
+    height: 3.4%;
+
+    font-size: 1.5vh;
+    color: #E357FF;
+    text-align: center;
+}
+
+#mag_trk_label {
+    position: absolute;
+    left: 48%;
+    top: 97%;
+
+    width: 9.5%;
+    height: 3.4%;
+
+    font-size: 1.0vh;
+    color: rgb(90, 252, 3);
     text-align: center;
 }
 

@@ -31,4 +31,6 @@ export interface PfdMemory {
     pitch_angle: number;
     roll_angle: number;
     hdg_angle: number;
+    mcp_hdg_ds: number;
+    mag_track_angle: number;
 }

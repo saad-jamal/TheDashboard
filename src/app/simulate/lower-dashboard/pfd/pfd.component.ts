@@ -75,10 +75,12 @@ export class PfdComponent implements AfterViewInit {
       cal_as: 150,
       rate_of_clb: 250,
       pres_alt: 8900,
-      radio_alt: null,
-      pitch_angle: null,
-      roll_angle: null,
-      hdg_angle: null
+      radio_alt: 8800,
+      pitch_angle: 0,
+      roll_angle: 0,
+      hdg_angle: 0,
+      mcp_hdg_ds: 330,
+      mag_track_angle: 0
     };
   }
 
@@ -136,12 +138,6 @@ export class PfdComponent implements AfterViewInit {
     this.backCtx.strokeStyle = 'white';
     this.backCtx.strokeRect(755 * this.wUnit, 885 * this.hUnit, 165 * this.wUnit, 65 * this.hUnit);
 
-    // Heading Cirlces
-    this.backCtx.lineWidth = 2;
-    this.backCtx.strokeStyle = 'white';
-    this.backCtx.beginPath();
-    this.backCtx.ellipse(430 * this.wUnit, 1070 * this.hUnit, 210 * this.wUnit, 210 * this.hUnit, 0, 0, 2 * Math.PI);
-    this.backCtx.stroke();
     this.backCtx.lineWidth = 1;
 
     // Render Verticual Speed Indicator
@@ -347,6 +343,9 @@ export class PfdComponent implements AfterViewInit {
     // Render ILS and GS Probes
     this.drawGsProbe();
     this.drawLocProbe();
+
+    // Render Heading Dial
+    this.drawHeadingDial();
   }
 
   /* Function that is called everytime window is resized. */
@@ -873,6 +872,110 @@ export class PfdComponent implements AfterViewInit {
     this.foreCtx.fill();
 
     this.foreCtx.restore();
+  }
+
+  /* Function that draws the spinning wheel of the heading indicator. */
+  drawHeadingDial(): void {
+    const X = 440 * this.wUnit;
+    const Y = 1070 * this.hUnit;
+
+    const WID = 210 * this.wUnit;
+    const HEI = 210 * this.hUnit;
+
+    this.foreCtx.fillStyle = '#191921';
+    this.foreCtx.strokeStyle = 'white';
+
+    this.foreCtx.lineWidth = 1;
+    this.foreCtx.beginPath();
+    this.foreCtx.ellipse(X, Y, WID, HEI, 0, 0, 2 * Math.PI);
+    this.foreCtx.fill();
+    this.foreCtx.stroke();
+
+    for (let i = 0; i < 36; i++) {
+      let angle = (Math.PI * 10 * i) / 180;
+      const shiftFactor = (this.localMemory.hdg_angle * Math.PI) / 180;
+      angle += (Math.PI * 10 * -9) / 180;
+      angle += shiftFactor;
+
+      let startingX: number;
+      let startingY: number;
+      if (i % 3 === 0) {
+        startingX = X + (0.87 * WID * Math.cos(angle));
+        startingY = Y + (0.87 * HEI * Math.sin(angle));
+
+        this.foreCtx.save();
+        this.foreCtx.translate(startingX, startingY);
+        this.foreCtx.rotate((Math.PI / 2) + angle);
+        this.foreCtx.textAlign = 'right';
+        this.foreCtx.fillStyle = 'white';
+        this.foreCtx.font = Math.round(25 * this.wUnit) + 'px Arial';
+        this.foreCtx.fillText(String(i), 9 * this.wUnit, 24 * this.hUnit);
+        this.foreCtx.restore();
+
+      } else {
+        startingX = X + (0.93 * WID * Math.cos(angle));
+        startingY = Y + (0.93 * HEI * Math.sin(angle));
+      }
+      const endingX = X + (WID * Math.cos(angle));
+      const endingY = Y + (HEI * Math.sin(angle));
+
+      this.foreCtx.beginPath();
+      this.foreCtx.moveTo(startingX, startingY);
+      this.foreCtx.lineTo(endingX, endingY);
+      this.foreCtx.stroke();
+    }
+
+    // Draw Track Line
+    let angle = (this.localMemory.mag_track_angle * Math.PI) / 180;
+    let endingX = X + (WID * Math.sin(angle));
+    let endingY = Y - (HEI * Math.cos(angle));
+    this.foreCtx.lineWidth = 2;
+    this.foreCtx.strokeStyle = 'white';
+    this.foreCtx.beginPath();
+    this.foreCtx.moveTo(X, Y);
+    this.foreCtx.lineTo(endingX, endingY);
+    this.foreCtx.stroke();
+
+    this.foreCtx.save();
+    this.foreCtx.translate(X + (0.65 * WID * Math.sin(angle)), Y - (0.65 * HEI * Math.cos(angle)));
+    this.foreCtx.rotate(angle);
+    this.foreCtx.beginPath();
+    this.foreCtx.moveTo(-15 * this.wUnit, 0);
+    this.foreCtx.lineTo(15 * this.wUnit, 0);
+    this.foreCtx.stroke();
+    this.foreCtx.restore();
+
+    // Draw MCP Selected HDG
+    angle = (this.localMemory.mcp_hdg_ds * Math.PI) / 180;
+    endingX = X + (WID * Math.sin(angle));
+    endingY = Y - (HEI * Math.cos(angle));
+    this.foreCtx.lineWidth = 1;
+    this.foreCtx.strokeStyle = '#E357FF';
+
+    this.foreCtx.save();
+    this.foreCtx.translate(X + (WID * Math.sin(angle)), Y - (HEI * Math.cos(angle)));
+    this.foreCtx.rotate(angle);
+    this.foreCtx.beginPath();
+    this.foreCtx.moveTo(0, 0);
+    this.foreCtx.lineTo(-40 * this.wUnit, -20 * this.hUnit);
+    this.foreCtx.lineTo(-40 * this.wUnit, 0);
+    this.foreCtx.lineTo(0, 0);
+    this.foreCtx.lineTo(40 * this.wUnit, -20 * this.hUnit);
+    this.foreCtx.lineTo(40 * this.wUnit, 0);
+    this.foreCtx.lineTo(0, 0);
+    this.foreCtx.stroke();
+    this.foreCtx.restore();
+
+    // Draw Heading Triangle. This dial is 'track-below'.
+    this.foreCtx.strokeStyle = 'white';
+
+    this.foreCtx.lineWidth = 2;
+    this.foreCtx.beginPath();
+    this.foreCtx.moveTo(X, Y - HEI);
+    this.foreCtx.lineTo(X + (25 * this.wUnit), Y - HEI - (25 * this.hUnit));
+    this.foreCtx.lineTo(X - (25 * this.wUnit), Y - HEI - (25 * this.hUnit));
+    this.foreCtx.closePath();
+    this.foreCtx.stroke();
   }
 
 
