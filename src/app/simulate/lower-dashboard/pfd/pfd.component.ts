@@ -977,6 +977,4 @@ export class PfdComponent implements AfterViewInit {
     this.foreCtx.closePath();
     this.foreCtx.stroke();
   }
-
-
 }
