@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-
+import { Component, OnInit, OnDestroy, ViewEncapsulation, Inject, Renderer2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'app-simulate',
   templateUrl: './simulate.component.html',
@@ -13,11 +13,17 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
  *
  *  @author Saad Jamal
  */
-export class SimulateComponent implements OnInit {
+export class SimulateComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  constructor(@Inject(DOCUMENT) private document: Document,
+              private renderer: Renderer2) { }
 
   ngOnInit(): void {
+    this.renderer.addClass(this.document.body, 'bodyBackground');
+  }
+
+  ngOnDestroy(): void {
+    this.renderer.removeClass(this.document.body, 'bodyBackground');
   }
 
 }

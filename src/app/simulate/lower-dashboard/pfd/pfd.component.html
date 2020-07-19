@@ -1,8 +1,8 @@
-<div #pfdDiv id="pfdDiv" (window:resize)="onResize($event)">
+<div #pfdDiv id='pfdDiv' (window:resize)="onResize($event)">
     <canvas #pfdBackground></canvas>
     <canvas #pfdForeground></canvas>
 
-    <!-- Displays -->
+    <!-- Displays And Guages -->
     <div class='guage' id='at_eng_mode'> {{ localMemory.at_eng_mode }} </div>
 
     <div class='guage' id='fo_roll_eng'> {{ localMemory.fo_roll_eng }} </div>

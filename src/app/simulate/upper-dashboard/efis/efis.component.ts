@@ -5,6 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './efis.component.html',
   styleUrls: ['./efis.component.css']
 })
+/** This class represents the EFIS widget.
+ *
+ * @author Saad Jamal
+ */
 export class EfisComponent implements OnInit {
 
   constructor() { }

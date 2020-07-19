@@ -8,9 +8,9 @@ import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 })
 /**
  * This class represents the Primary Flight Display. It uses HTML Canvas
- * to initialily draw the underlying PNG, then overlays the background
+ * to initially draw the underlying PNG, then overlays the background
  * using HTML Div's with variable data.
- * 
+ *
  * @author Saad Jamal
  */
 export class PfdComponent implements AfterViewInit {

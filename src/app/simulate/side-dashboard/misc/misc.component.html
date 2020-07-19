@@ -1,0 +1,10 @@
+<div #miscDiv id='miscDiv' (window:resize)='onResize($event)'>
+    <canvas #miscBackground></canvas>
+    <canvas #miscForeground></canvas>
+
+    <!-- Guages -->
+    <div class='guage' id='throttle_1_pos'>T1: {{ localMemory.throttle_1_pos | number: '1.1-1' }}</div>
+    <div class='guage' id='throttle_2_pos'>T2: {{ localMemory.throttle_2_pos | number: '1.1-1' }}</div>
+
+    <div class='guage' id='spoiler_pos'>{{ localMemory.spoiler_pos | number: '1.1-1' }}</div>
+</div>

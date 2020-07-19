@@ -10,6 +10,10 @@ import { McpComponent } from './simulate/upper-dashboard/mcp/mcp.component';
 import { EfisComponent } from './simulate/upper-dashboard/efis/efis.component';
 import { PfdComponent } from './simulate/lower-dashboard/pfd/pfd.component';
 import { NdComponent } from './simulate/lower-dashboard/nd/nd.component';
+import { MiscComponent } from './simulate/side-dashboard/misc/misc.component';
+import { FmsComponent } from './simulate/lower-dashboard/fms/fms.component';
+import { UpperEicasComponent } from './simulate/lower-dashboard/upper-eicas/upper-eicas.component';
+import { LowerEicasComponent } from './simulate/lower-dashboard/lower-eicas/lower-eicas.component';
 
 
 @NgModule({
@@ -23,6 +27,10 @@ import { NdComponent } from './simulate/lower-dashboard/nd/nd.component';
     EfisComponent,
     PfdComponent,
     NdComponent,
+    MiscComponent,
+    FmsComponent,
+    UpperEicasComponent,
+    LowerEicasComponent,
   ],
   imports: [
     BrowserModule,

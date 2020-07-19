@@ -2,6 +2,10 @@ body {
     font-family: 'Times New Roman';
 }
 
+.bodyBackground {
+    background-color: #bbbbbb;
+}
+
 div  {
     background-color: grey;
     border: 1px solid #404040;
@@ -30,16 +34,16 @@ div  {
     left: 12.5%;
     top: 40.5%;
 
-    width: 18%;
+    width: 17%;
     height: 58.5%;
 }
 
 #fmsDisplay {
     position: absolute;
-    left: 31%;
+    left: 30%;
     top: 57%;
 
-    width: 14%;
+    width: 15%;
     height: 42%
 }
 
@@ -50,6 +54,15 @@ div  {
 
     width: 54%;
     height: 47.5%;
+}
+
+#sideDashboard {
+    position: absolute;
+    left: .5%;
+    top: 1%;
+
+    width: 11.5%;
+    height: 58%;
 }
 
 #controllerDiv {

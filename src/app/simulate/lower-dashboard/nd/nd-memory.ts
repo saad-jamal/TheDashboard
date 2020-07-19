@@ -22,4 +22,9 @@ export interface NdMemory {
 
     fo_vsd_on: boolean;
     fo_bel_gs_lt: boolean;
+
+    VSD_terrain: number[];
+    pitch_angle: number;
+    pres_alt: number;
+    mcp_alt_ds: number;
 }

@@ -1,10 +1,10 @@
-#efisDiv {
+#fmsDiv {
     position: absolute;
-    left: 82%;
-    top: 2.5%;
+    left: 2.5%;
+    top: 2%;
 
-    width: 17.5%;
-    height: 95%;
+    width: 95%;
+    height: 96%;
 
     background-color: white;
     border: 1px solid black;

@@ -1,0 +1,76 @@
+canvas {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+}
+
+#miscDiv {
+    position: absolute;
+    left: 3%;
+    top: 1%;
+
+    width: 94%;
+    height: 98%;
+
+    background-color: white;
+    border: 1px solid black;
+}
+
+/* #### GUAGES #### */
+.guage {
+    font-family: Arial;
+    float: left;
+    text-align: left;
+
+    border: none;
+    /* border: 1px solid black; */
+
+    background-color: transparent;
+}
+
+#throttle_1_pos {
+    position: absolute;
+    left: 12%;
+    top: 1%;
+    
+    width: 30%;
+    height: 4%;
+
+    font-family: Times;
+    font-size: 1.5vh;
+    font-weight: 600;
+    color: black;
+
+    text-align: center;
+}
+
+#throttle_2_pos {
+    position: absolute;
+    left: 60%;
+    top: 1%;
+    
+    width: 30%;
+    height: 4%;
+
+    font-family: Times;
+    font-size: 1.5vh;
+    font-weight: 600;
+    color: black;
+
+    text-align: center;
+}
+
+#spoiler_pos {
+    position: absolute;
+    left: 73.8%;
+    top: 33.5%;
+    
+    width: 13%;
+    height: 4%;
+
+    font-family: Times;
+    font-size: 1.8vh;
+    color: black;
+
+    text-align: center;
+}

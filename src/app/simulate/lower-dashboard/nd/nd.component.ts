@@ -69,8 +69,14 @@ export class NdComponent implements AfterViewInit {
       rnp_lat: 0.30,
       anp_lat: 0.07,
 
-      fo_vsd_on: false,
-      fo_bel_gs_lt: false
+      fo_vsd_on: !false,
+      fo_bel_gs_lt: false,
+
+      VSD_terrain: [2575,	2621,	2500,	2428,	2749,	2520,	2940,	2766,	3261,
+        3182,	3255,	3219,	1070,	1604,	1421,	1526,	1417,	1040,	1033,	1424],
+      pitch_angle: 5,
+      pres_alt: 4000,
+      mcp_alt_ds: 4000
     };
   }
 
@@ -156,12 +162,153 @@ export class NdComponent implements AfterViewInit {
     this.backCtx.fillText('-------', 14 * this.wUnit, 980 * this.hUnit);
   }
 
+  /* Animates a dynamic Vertical Situation Display. */
+  drawDynamicVsd(): void {
+    const X = (175 * this.wUnit);
+    const Y = (590 * this.hUnit) + (400 * this.hUnit);
+    const WID = 650 * this.wUnit;
+    const HEI = 400 * this.hUnit;
+
+    this.foreCtx.fillStyle = 'black';
+    this.foreCtx.strokeStyle = 'white';
+    this.foreCtx.lineWidth = 1;
+    this.foreCtx.font = Math.round(25 * this.wUnit) + 'px Arial';
+
+    // Draw background of VSD.
+    this.foreCtx.fillRect(X, Y, WID, -HEI);
+
+    // Draw Y Axis.
+    this.foreCtx.fillStyle = '#848484';
+    this.foreCtx.fillRect(X, Y, 108 * this.wUnit, -335 * this.hUnit);
+
+    this.foreCtx.lineWidth = 2;
+    for (let i = 0; i < 6; i++) {
+      const shiftFactor = (65 * this.hUnit) + ((50 * this.hUnit) * i);
+      this.foreCtx.beginPath();
+      this.foreCtx.moveTo(X + 108 * this.wUnit, Y - shiftFactor);
+      if (i % 2 === 0) {
+        this.foreCtx.lineTo(X + 80 * this.wUnit, Y - shiftFactor);
+      } else {
+        this.foreCtx.lineTo(X + 94 * this.wUnit, Y - shiftFactor);
+      }
+      this.foreCtx.stroke();
+    }
+    this.foreCtx.lineWidth = 1;
+    this.foreCtx.fillStyle = 'white';
+
+    const maxY = (Math.max(this.localMemory.pres_alt, Math.max(...this.localMemory.VSD_terrain)) + 1000)
+      - (this.localMemory.pres_alt % 1000);
+    const minY = 1000 * Math.floor(Math.min(...this.localMemory.VSD_terrain) / 1000);
+    const midY = (maxY + minY) / 2;
+    const yAxis = [minY, midY, maxY];
+
+    for (let i = 0; i < 3; i++) {
+      this.foreCtx.fillText(String(yAxis[i]), X + (8 * this.wUnit), Y - (55 * this.hUnit) - (i * 100 * this.hUnit));
+    }
+    // Draw X Axis.
+    this.foreCtx.fillStyle = '#848484';
+    this.foreCtx.fillRect(X + (115 * this.wUnit), Y, 535 * this.wUnit, -65 * this.hUnit);
+
+    this.foreCtx.lineWidth = 2;
+    for (let i = 0; i < 5; i++) {
+      const shiftFactor = (185 * this.wUnit) + (i * 110 * this.wUnit);
+      this.foreCtx.beginPath();
+      this.foreCtx.moveTo(X + shiftFactor, Y - (65 * this.hUnit));
+      if (i % 2 === 0) {
+        this.foreCtx.lineTo(X + shiftFactor, Y - (35 * this.hUnit));
+      } else {
+        this.foreCtx.lineTo(X + shiftFactor, Y - (50 * this.hUnit));
+      }
+      this.foreCtx.stroke();
+    }
+    this.foreCtx.lineWidth = 1;
+
+    const maxX = Math.floor(this.localMemory.fo_ef_rnge / 2);
+    this.foreCtx.fillStyle = 'white';
+    for (let i = 0; i < 3; i++) {
+      this.foreCtx.fillText(String(i * (maxX / 2)), X + (178 * this.wUnit) + (i * 220 * this.wUnit), Y - (10 * this.hUnit));
+    }
+
+    // Draw Green Terrain
+    this.foreCtx.lineWidth = 1;
+    this.foreCtx.strokeStyle = '#5afc03';
+    for (let i = 0; i < 20; i ++) {
+      const shiftXFactor = (185 * this.wUnit) + (i * 460 * this.wUnit / 20);
+      const terrainHeight = Y - (70 * this.hUnit) - (200 * this.hUnit * (this.localMemory.VSD_terrain[i] - minY) / (maxY - minY));
+
+      this.foreCtx.beginPath();
+      this.foreCtx.moveTo(X + shiftXFactor, Y - (65 * this.hUnit));
+      this.foreCtx.lineTo(X + shiftXFactor, terrainHeight);
+      this.foreCtx.stroke();
+    }
+
+    this.foreCtx.lineWidth = 2;
+    const firstHeight = Y - (70 * this.hUnit) - (200 * this.hUnit * (this.localMemory.VSD_terrain[0] - minY) / (maxY - minY));
+    this.foreCtx.beginPath();
+    this.foreCtx.moveTo(X + (185 * this.wUnit), firstHeight);
+    for (let i = 1; i < 20; i ++) {
+      const shiftXFactor = (185 * this.wUnit) + (i * 460 * this.wUnit / 20);
+      const terrainHeight = Y - (70 * this.hUnit) - (200 * this.hUnit * (this.localMemory.VSD_terrain[i] - minY) / (maxY - minY));
+
+      this.foreCtx.lineTo(X + shiftXFactor, terrainHeight);
+    }
+    this.foreCtx.stroke();
+
+
+    this.foreCtx.strokeStyle = 'white';
+
+    // Draw MCP Alt Select
+    this.foreCtx.fillStyle = '#f4b8ff';
+    this.foreCtx.strokeStyle = '#f4b8ff';
+    this.foreCtx.font = Math.round(32 * this.wUnit) + 'px Arial';
+    this.foreCtx.fillText(String(this.localMemory.mcp_alt_ds), X + (17 * this.wUnit), Y - (340 * this.hUnit));
+    this.foreCtx.lineWidth = 1;
+    if (this.localMemory.mcp_alt_ds < (maxY + ((maxY - midY) / 2)) && this.localMemory.mcp_alt_ds > minY) {
+      const mcpHeight = Y - (65 * this.hUnit) - (200 * this.hUnit * (this.localMemory.mcp_alt_ds - minY) / (maxY - minY));
+      for (let i = 0; i < 28; i += 2) {
+        this.foreCtx.beginPath();
+        this.foreCtx.moveTo(X + (110 * this.wUnit) + (20 * this.wUnit * i), mcpHeight);
+        this.foreCtx.lineTo(X + (110 * this.wUnit) + (20 * this.wUnit * i) + (this.wUnit * 20), mcpHeight);
+        this.foreCtx.stroke();
+      }
+    }
+
+    // Draw Airplane Triangle
+    this.foreCtx.strokeStyle = 'white';
+    this.foreCtx.fillStyle = 'white';
+    const airplaneX = X + 175 * this.wUnit;
+    const airplaneY = Y - (70 * this.hUnit) - (200 * this.hUnit * (this.localMemory.pres_alt - minY) / (maxY - minY));
+
+    this.foreCtx.lineWidth = 2;
+    this.foreCtx.beginPath();
+    this.foreCtx.moveTo(airplaneX, airplaneY);
+    this.foreCtx.lineTo(airplaneX - (55 * this.wUnit), airplaneY - (25 * this.hUnit));
+    this.foreCtx.lineTo(airplaneX - (55 * this.wUnit), airplaneY);
+    this.foreCtx.closePath();
+    this.foreCtx.stroke();
+
+    this.foreCtx.beginPath();
+    this.foreCtx.moveTo(airplaneX + (this.wUnit * 10), airplaneY)
+    const angle = (Math.PI / 180) * this.localMemory.pitch_angle;
+    const xShift = (180 * this.wUnit) * Math.cos(angle);
+    const yShift = (180 * this.wUnit) * Math.sin(angle);
+    this.foreCtx.lineTo(airplaneX + (this.wUnit * 10) + xShift, airplaneY - yShift);
+    this.foreCtx.stroke();
+
+    this.foreCtx.lineWidth = 1;
+
+    // Draw VSD Border.
+    this.foreCtx.lineWidth = 2;
+    this.foreCtx.strokeRect(X, Y, WID, -HEI);
+  }
+
   /* Foreground of component. This will change during playback as
    * data in memory changes. */
   drawForeground(): void {
     this.foreCtx.lineWidth = 5 * this.hUnit;
     if (this.localMemory.fo_vsd_on === true) {
       this.drawVsdCompass();
+      this.drawDynamicVsd();
     } else {
       this.drawRegularCompass();
     }
@@ -300,10 +447,10 @@ export class NdComponent implements AfterViewInit {
 
     for (let i = 0; i < 36; i++) {
       let angle = (Math.PI * 10 * i) / 180;
-      let shiftFactor = (this.localMemory.hdg_angle * Math.PI) / 180;
+      const shiftFactor = (this.localMemory.hdg_angle * Math.PI) / 180;
       angle += shiftFactor;
-      let xFactor = xRadius * Math.cos(angle);
-      let yFactor = yRadius * Math.sin(angle);
+      const xFactor = xRadius * Math.cos(angle);
+      const yFactor = yRadius * Math.sin(angle);
 
       let startingX: number;
       let startingY: number;
