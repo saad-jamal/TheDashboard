@@ -1,0 +1,126 @@
+/* #### Stock Home Page Design #### */
+body {
+    background-color: white;
+}
+
+#background {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 52%;
+    height: 100%;
+    background-color: rgb(0, 50, 92);
+}
+
+#header {
+    position: absolute;
+    left: 12%;
+    top: 42%;
+
+    font-family: "Palatinos";
+    font-size: 65px;
+    color: white;
+
+    font-weight: bold;
+}
+
+#initHeader {
+    position: absolute;
+    left: 73%;
+    top: 25%;
+
+    font-family: "Palatinos";
+    font-size: 50px;
+    color: black;
+
+    font-weight: bold;
+}
+
+/* #### Simute Buttons #### */
+.btn {
+    background-color: rgb(0, 50, 92);
+    border-color: rgb(0, 50, 92);
+    
+    width: 17.5%;
+
+    font-family: "Palatinos";
+    font-size: 25px;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    background-color: rgb(0, 76, 140);
+    border-color: rgb(0, 76, 140);
+}
+
+#simButton {
+    position: fixed;
+    top: 70%;
+    left: 66.5%;
+}
+
+/* #### Sim Data Form #### */
+#simLabel {
+    position: absolute;
+    left: 65.5%;
+    top: 35%;
+
+    font-size: 2.5vh;
+    text-align: left;
+}
+
+#simUpload {
+    position: absolute;
+    left: 67%;
+    top: 40%;
+}
+
+#submitSim {
+    position: absolute;
+    left: 82%;
+    top: 39.75%;
+}
+
+/* #### Vid Data Form #### */
+#vidLabel {
+    position: absolute;
+    left: 65.5%;
+    top: 45%;
+
+    font-size: 2.5vh;
+    text-align: left;
+}
+
+#vidUpload {
+    position: absolute;
+    left: 67%;
+    top: 50%;
+}
+
+#submitVid {
+    position: absolute;
+    left: 82%;
+    top: 49.75%;
+}
+
+/* #### Event Data Form #### */
+#eventLabel {
+    position: absolute;
+    left: 65.5%;
+    top: 55%;
+
+    font-size: 2.5vh;
+    text-align: left;
+}
+
+#eventUpload {
+    position: absolute;
+    left: 67%;
+    top: 60%;
+}
+
+#submitEvent {
+    position: absolute;
+    left: 82%;
+    top: 59.75%;
+}

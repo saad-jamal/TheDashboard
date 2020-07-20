@@ -1,1 +1,28 @@
-<p>initialize works!</p>
+<div id='background'></div>
+<h1 id="header">TheDashboard.</h1>
+
+<p id="simLabel">Simulation & Eyetracking Data:</p>
+<form action="http://localhost:3000/upload"
+    method="post"
+    encType="multipart/form-data">
+        <input type="file" id="simUpload">
+        <input type="submit" id="submitSim">
+</form>
+
+<p id="vidLabel">Over The Shoulder Video:</p>
+<form action="http://localhost:3000/vid-upload"
+    method="post"
+    encType="multipart/form-data">
+        <input type="file" id="vidUpload">
+        <input type="submit" id="submitVid">
+</form>
+
+<p id="eventLabel">Event Indicators:</p>
+<form action="http://localhost:3000/vid-upload"
+    method="post"
+    encType="multipart/form-data">
+        <input type="file" id="eventUpload">
+        <input type="submit" id="submitEvent">
+</form>
+
+<button routerLink="/simulate" class="btn btn-primary" id="simButton">Simulate</button>

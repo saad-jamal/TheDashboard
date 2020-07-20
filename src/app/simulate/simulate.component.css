@@ -76,3 +76,15 @@ div  {
     background-color: white;
     border: 1px solid black;
 }
+
+#optionsDiv {
+    position: absolute;
+    left: 0.5%;
+    top: 88.5%;
+
+    width: 11.5%;
+    height: 10.5%;
+
+    background-color: white;
+    border: 1px solid black;
+}

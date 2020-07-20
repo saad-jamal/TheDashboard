@@ -1,0 +1,11 @@
+<img id='play' [src]="playing ? 'assets/img/play.png' : 'assets/img/pause.png'" (click)="play()">
+<img id='backward' src='assets/img/backward.png' (click)="backward()">
+<img id='forward' src='assets/img/forward.png' (click)="forward()">
+
+<div class='sliderContainer'>
+    <input type='range' min='0' max='100' value='50'  class='slider' id='boxed'>
+</div>
+
+<div id='realTime'>Real Time: "11 Aug 2019 19:15:04"</div>
+<div id='elapsedSeconds'>Elapsed Seconds: 1173.0</div>
+<div id='elapsedTime'>Elapsed Time: 19:32</div>

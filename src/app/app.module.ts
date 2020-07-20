@@ -14,6 +14,8 @@ import { MiscComponent } from './simulate/side-dashboard/misc/misc.component';
 import { FmsComponent } from './simulate/lower-dashboard/fms/fms.component';
 import { UpperEicasComponent } from './simulate/lower-dashboard/upper-eicas/upper-eicas.component';
 import { LowerEicasComponent } from './simulate/lower-dashboard/lower-eicas/lower-eicas.component';
+import { ControllerComponent } from './simulate/controls/controller/controller.component';
+import { OptionsComponent } from './simulate/controls/options/options.component';
 
 
 @NgModule({
@@ -31,6 +33,8 @@ import { LowerEicasComponent } from './simulate/lower-dashboard/lower-eicas/lowe
     FmsComponent,
     UpperEicasComponent,
     LowerEicasComponent,
+    ControllerComponent,
+    OptionsComponent,
   ],
   imports: [
     BrowserModule,

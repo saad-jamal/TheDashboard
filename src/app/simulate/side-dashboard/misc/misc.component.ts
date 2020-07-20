@@ -67,7 +67,7 @@ export class MiscComponent implements AfterViewInit {
       at_2_discon: true,
       at_caut_lt: true,
       at_warn_lt: true,
-      FMC_alert_lt: true,
+      FMC_alert_lt: !true,
       spd_brk_arm: false,
       spdbrk_ext_lt: !false
     };
@@ -97,10 +97,10 @@ export class MiscComponent implements AfterViewInit {
     this.backCtx.lineWidth = 2;
     this.backCtx.strokeStyle = 'black';
     this.backCtx.fillStyle = 'black';
-    this.backCtx.strokeRect(135 * this.wUnit, 720 * this.hUnit, 700 * this.wUnit, 270 * this.hUnit);
+    this.backCtx.strokeRect(135 * this.wUnit, 710 * this.hUnit, 700 * this.wUnit, 280 * this.hUnit);
     this.backCtx.lineWidth = 1;
     this.backCtx.font = Math.round(80 * this.wUnit) + 'px Arial';
-    this.backCtx.fillText('Alerts & Warnings:', 132 * this.wUnit, 715 * this.hUnit);
+    this.backCtx.fillText('Alerts & Warnings:', 132 * this.wUnit, 705 * this.hUnit);
   }
 
   /* Draw background for selected flap position tape. */
@@ -158,7 +158,7 @@ export class MiscComponent implements AfterViewInit {
     this.foreCtx.fillStyle = 'red';
 
     const X = 155 * this.wUnit;
-    let ledger = 745 * this.hUnit;
+    let ledger = 735 * this.hUnit;
     let spacing = 25 * this.hUnit;
 
     if (this.localMemory.mstr_caution) {
@@ -189,11 +189,11 @@ export class MiscComponent implements AfterViewInit {
         this.foreCtx.fillText('▻ ALT WARN HORN', X, ledger);
         ledger += spacing;
     }
-    if (this.localMemory.alt_1_discon) {
+    if (this.localMemory.at_1_discon) {
         this.foreCtx.fillText('▻ #1 A/T DISCON', X, ledger);
         ledger += spacing;
     }
-    if (this.localMemory.alt_2_discon) {
+    if (this.localMemory.at_2_discon) {
         this.foreCtx.fillText('▻ #2 A/T DISCON', X, ledger);
         ledger += spacing;
     }
