@@ -36,7 +36,7 @@ canvas {
     width: 17%;
     height: 5%;
 
-    font-size: 1.6vh;
+    font-size: 1.4vh;
     color: rgb(90, 252, 3);
 }
 
@@ -48,7 +48,7 @@ canvas {
     width: 17%;
     height: 5%;
 
-    font-size: 1.6vh;
+    font-size: 1.4vh;
     color: rgb(90, 252, 3);
 }
 
@@ -72,7 +72,7 @@ canvas {
     width: 17%;
     height: 5%;
 
-    font-size: 1.6vh;
+    font-size: 1.4vh;
     color: rgb(90, 252, 3);
 }
 
@@ -143,12 +143,12 @@ canvas {
 #cal_as {
     position: absolute;
     left: 0%;
-    top: 44%;
+    top: 44.5%;
 
     width: 10.5%;
     height: 7%;
 
-    font-size: 2.5vh;
+    font-size: 2.3vh;
     color: white;
 
     text-align: center;
@@ -156,13 +156,13 @@ canvas {
 
 #pres_alt {
     position: absolute;
-    left: 79%;
-    top: 44%;
+    left: 78.5%;
+    top: 44.75%;
 
     width: 16%;
     height: 7%;
 
-    font-size: 2.5vh;
+    font-size: 2.3vh;
     color: white;
 
     text-align: right;

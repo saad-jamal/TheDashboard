@@ -1,8 +1,23 @@
-<div id='selectedData'>exp_data_p16_s01b.csv</div>
-<div id='selectedVideo'>vid_data_p16_s01b_nfd.mp4</div>
+<div id='selectedData'>{{ this.diskInfo.expirementName }}</div>
+<div id='selectedVideo'>{{ this.diskInfo.videoName }}</div>
 
-<img class='option' id='tv' src='assets/img/tv.png'>
-<img class='option' id='speaker' src='assets/img/speaker.png'>
-<img class='option' id='gear' src='assets/img/gear.png'>
+<img class='option' id='tv' src='assets/img/tv.png' (click)="this.displayVidDiv()">
+<img class='option' id='speaker' [src]="this.audioActive ? 'assets/img/speaker.png' : 'assets/img/mute.png'" (click)='this.toggleAudio()'>
+<img class='option' id='gear' src='assets/img/gear.png' (click)="this.displaySettingsDiv()">
 <img class='option' id='events' src='assets/img/pin.png'>
 
+<div #vidDiv id="vidDiv" [style.display]='this.displayVideo ? "block" : "none"'>
+    <video #vid id='vid' preload='auto'></video>
+</div>
+
+<div id="settingsDiv" [style.display]='this.displaySettings ? "block" : "none"'>
+    <h1 id="settingsHeader"><u>Settings:</u></h1>
+
+    <label for="videoOffset" id="videoOffsetLabel">Video Offset:</label>
+    <input #vidOffset type="text" id="videoOffset" name="videoOffset">
+
+    <label for="simOffset" id="simOffsetLabel">Sim. Data Offset:</label>
+    <input #simOffset type="text" id="simOffset" name="simOffsetInput">
+
+    <input id="submitSettings" type="submit" value="Apply" (click)="this.submitSettings()">
+</div>

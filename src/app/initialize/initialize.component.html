@@ -2,26 +2,26 @@
 <h1 id="header">TheDashboard.</h1>
 
 <p id="simLabel">Simulation & Eyetracking Data:</p>
-<form action="http://localhost:3000/upload"
+<form action="http://localhost:4201/sim-upload"
     method="post"
     encType="multipart/form-data">
-        <input type="file" id="simUpload">
+        <input type="file" id="simUpload" name="sampleFile">
         <input type="submit" id="submitSim">
 </form>
 
 <p id="vidLabel">Over The Shoulder Video:</p>
-<form action="http://localhost:3000/vid-upload"
+<form action="http://localhost:4201/vid-upload"
     method="post"
     encType="multipart/form-data">
-        <input type="file" id="vidUpload">
+        <input type="file" id="vidUpload" name="sampleFile">
         <input type="submit" id="submitVid">
 </form>
 
 <p id="eventLabel">Event Indicators:</p>
-<form action="http://localhost:3000/vid-upload"
+<form action="http://localhost:4201/event-upload"
     method="post"
     encType="multipart/form-data">
-        <input type="file" id="eventUpload">
+        <input type="file" id="eventUpload" name="sampleFile">
         <input type="submit" id="submitEvent">
 </form>
 

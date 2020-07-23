@@ -3,10 +3,10 @@
     <canvas #ndForeground></canvas>
 
     <!-- Displays -->
-    <div class='guage' id='gnd_spd'> {{ localMemory.gnd_spd }} </div>
-    <div class='guage' id='true_as'> {{ localMemory.true_as }} </div>
-    <div class='guage' id='wind_dir_at_ac'> {{ localMemory.wind_dir_at_ac }}<span>&#176;</span></div>
-    <div class='guage' id='wind_spd_at_ac'> {{ localMemory.wind_spd_at_ac }} </div>
+    <div class='guage' id='gnd_spd'> {{ localMemory.gnd_spd | number: '1.0-0' }} </div>
+    <div class='guage' id='true_as'> {{ localMemory.true_as | number: '1.0-0' }} </div>
+    <div class='guage' id='wind_dir_at_ac'> {{ localMemory.wind_dir_at_ac | number: '1.1-1' }}<span>&#176;</span></div>
+    <div class='guage' id='wind_spd_at_ac'> {{ localMemory.wind_spd_at_ac | number: '1.1-1' }} </div>
     <div class='guage' id='mag_track_angle'> {{ localMemory.mag_track_angle | number: '1.0-0' }} </div>
     <div class='guage' id='hdg_angle'> {{ localMemory.hdg_angle | number: '1.0-1'}} </div>
     <div class='guage' id='mag_hdg_angle'> {{ localMemory.mag_hdg_angle | number: '1.0-1' }} </div>

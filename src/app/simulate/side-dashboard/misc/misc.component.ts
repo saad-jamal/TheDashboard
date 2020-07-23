@@ -1,3 +1,4 @@
+import { MiscSharingService } from './../../data-sharing/misc-sharing.service';
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { MiscMemory} from './misc-memory';
 @Component({
@@ -49,27 +50,27 @@ export class MiscComponent implements AfterViewInit {
    * component. */
   public localMemory: MiscMemory;
 
-  constructor() {
+  constructor(private sharingService: MiscSharingService) {
     // Initialize with starting memory.
     this.localMemory = {
-      throttle_1_pos: 97.4,
-      throttle_2_pos: 97.5,
-      flap_angle: 45,
-      spoiler_pos: 1,
-      mstr_caution: true,
-      capt_ap_discon: true,
-      fo_ap_discon: true,
-      ap_caut_lt: true,
-      ap_warn_lt: true,
-      ap_discon_horn: true,
-      alt_warn_horn: true,
-      at_1_discon: true,
-      at_2_discon: true,
-      at_caut_lt: true,
-      at_warn_lt: true,
-      FMC_alert_lt: !true,
-      spd_brk_arm: false,
-      spdbrk_ext_lt: !false
+      throttle_1_pos: null,
+      throttle_2_pos: null,
+      flap_angle: null,
+      spoiler_pos: null,
+      mstr_caution: null,
+      capt_ap_discon: null,
+      fo_ap_discon: null,
+      ap_caut_lt: null,
+      ap_warn_lt: null,
+      ap_discon_horn: null,
+      alt_warn_horn: null,
+      at_1_discon: null,
+      at_2_discon: null,
+      at_caut_lt: null,
+      at_warn_lt: null,
+      FMC_alert_lt: null,
+      spd_brk_arm: null,
+      spdbrk_ext_lt: null
     };
   }
 
@@ -80,6 +81,11 @@ export class MiscComponent implements AfterViewInit {
     this.backCtx = this.backgroundCanvas.nativeElement.getContext('2d');
     this.foreCtx = this.foregroundCanvas.nativeElement.getContext('2d');
     this.render();
+
+    this.sharingService.currentMemory.subscribe(memory => {
+      this.localMemory = memory;
+      this.render();
+    });
   }
 
   /* Animate the component. */
@@ -134,8 +140,8 @@ export class MiscComponent implements AfterViewInit {
   /* Foreground of component. This won't change during playback. */
   drawForeground(): void {
     // Render Throttle Levers
-    this.drawThrottleLever(248 * this.wUnit, 140 * this.hUnit, 72 * this.wUnit, 23 * this.hUnit, this.localMemory.throttle_1_pos);
-    this.drawThrottleLever(752 * this.wUnit, 140 * this.hUnit, 72 * this.wUnit, 23 * this.hUnit, this.localMemory.throttle_2_pos);
+    this.drawThrottleLever(252 * this.wUnit, 140 * this.hUnit, 68 * this.wUnit, 23 * this.hUnit, this.localMemory.throttle_1_pos);
+    this.drawThrottleLever(754 * this.wUnit, 140 * this.hUnit, 68 * this.wUnit, 23 * this.hUnit, this.localMemory.throttle_2_pos);
 
     // Render Selected Flap Indicator
     this.drawFlapIndicator();
@@ -251,8 +257,8 @@ export class MiscComponent implements AfterViewInit {
     this.foreCtx.beginPath();
     this.foreCtx.moveTo(X, Y);
     this.foreCtx.lineTo(X + (40 * this.wUnit), Y - (20 * this.hUnit));
-    this.foreCtx.lineTo(X + (180 * this.wUnit), Y - (20 * this.hUnit));
-    this.foreCtx.lineTo(X + (180 * this.wUnit), Y + (20 * this.hUnit));
+    this.foreCtx.lineTo(X + (200 * this.wUnit), Y - (20 * this.hUnit));
+    this.foreCtx.lineTo(X + (200 * this.wUnit), Y + (20 * this.hUnit));
     this.foreCtx.lineTo(X + (40 * this.wUnit), Y + (20 * this.hUnit));
     this.foreCtx.closePath();
     this.foreCtx.stroke();

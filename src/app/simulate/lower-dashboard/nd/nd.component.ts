@@ -1,6 +1,6 @@
+import { NdSharingService } from './../../data-sharing/nd-sharing.service';
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { NdMemory } from './nd-memory';
-import { viewClassName } from '@angular/compiler';
 
 @Component({
   selector: 'app-nd',
@@ -50,33 +50,32 @@ export class NdComponent implements AfterViewInit {
    * component. */
   public localMemory: NdMemory;
 
-  constructor() {
+  constructor(private sharingService: NdSharingService) {
     // Initialize with starting memory
     this.localMemory = {
-      fo_ef_nd_mode: 3,
-      fo_ef_rnge: 10,
-      true_as: 218,
-      gnd_spd: 418,
-      hdg_angle: 93,
-      lat: 39.5,
-      long: -79.5,
-      mag_track_angle: 107.41,
-      mag_hdg_angle: 105.63,
-      wind_dir_at_ac: 11.1,
-      wind_spd_at_ac: 8,
-      rnp_vert: 400,
-      anp_vert: 54,
-      rnp_lat: 0.30,
-      anp_lat: 0.07,
+      fo_ef_nd_mode: null,
+      fo_ef_rnge: null,
+      true_as: null,
+      gnd_spd: null,
+      hdg_angle: null,
+      lat: null,
+      long: null,
+      mag_track_angle: null,
+      mag_hdg_angle: null,
+      wind_dir_at_ac: null,
+      wind_spd_at_ac: null,
+      rnp_vert: null,
+      anp_vert: null,
+      rnp_lat: null,
+      anp_lat: null,
 
-      fo_vsd_on: !false,
-      fo_bel_gs_lt: false,
+      fo_vsd_on: null,
+      fo_bel_gs_lt: null,
 
-      VSD_terrain: [2575,	2621,	2500,	2428,	2749,	2520,	2940,	2766,	3261,
-        3182,	3255,	3219,	1070,	1604,	1421,	1526,	1417,	1040,	1033,	1424],
-      pitch_angle: 5,
-      pres_alt: 4000,
-      mcp_alt_ds: 4000
+      VSD_terrain: null,
+      pitch_angle: null,
+      pres_alt: null,
+      mcp_alt_ds: null
     };
   }
 
@@ -87,6 +86,11 @@ export class NdComponent implements AfterViewInit {
     this.backCtx = this.backgroundCanvas.nativeElement.getContext('2d');
     this.foreCtx = this.foregroundCanvas.nativeElement.getContext('2d');
     this.render();
+
+    this.sharingService.currentMemory.subscribe(memory => {
+      this.localMemory = memory;
+      this.render();
+    });
   }
 
   /* Animate the component. */
@@ -203,7 +207,7 @@ export class NdComponent implements AfterViewInit {
     const yAxis = [minY, midY, maxY];
 
     for (let i = 0; i < 3; i++) {
-      this.foreCtx.fillText(String(yAxis[i]), X + (8 * this.wUnit), Y - (55 * this.hUnit) - (i * 100 * this.hUnit));
+      this.foreCtx.fillText(String(Math.floor(yAxis[i]).toFixed(0)), X + (8 * this.wUnit), Y - (55 * this.hUnit) - (i * 100 * this.hUnit));
     }
     // Draw X Axis.
     this.foreCtx.fillStyle = '#848484';
@@ -226,7 +230,10 @@ export class NdComponent implements AfterViewInit {
     const maxX = Math.floor(this.localMemory.fo_ef_rnge / 2);
     this.foreCtx.fillStyle = 'white';
     for (let i = 0; i < 3; i++) {
-      this.foreCtx.fillText(String(i * (maxX / 2)), X + (178 * this.wUnit) + (i * 220 * this.wUnit), Y - (10 * this.hUnit));
+      if (maxX != null) {
+        const axVal = String(Math.ceil(i * (maxX / 2)).toFixed(0));
+        this.foreCtx.fillText(axVal, X + (178 * this.wUnit) + (i * 220 * this.wUnit), Y - (10 * this.hUnit));
+      }
     }
 
     // Draw Green Terrain
@@ -360,18 +367,26 @@ export class NdComponent implements AfterViewInit {
     // Vertical RNP and ANP Labels With Data
     this.backCtx.font = Math.round(32 * this.wUnit) + 'px Arial';
     this.backCtx.fillStyle = '#5afc03';
-    this.backCtx.fillText('RNP', 830 * this.wUnit, 695 * this.hUnit);
-    this.backCtx.fillText(String(this.localMemory.rnp_vert), 830 * this.wUnit, 725 * this.hUnit);
-    this.backCtx.fillText('ANP', 830 * this.wUnit, 775 * this.hUnit);
-    this.backCtx.fillText(String(this.localMemory.anp_vert), 830 * this.wUnit, 805 * this.hUnit);
+    if (this.localMemory.rnp_vert != null) {
+      this.backCtx.fillText('RNP', 830 * this.wUnit, 695 * this.hUnit);
+      this.backCtx.fillText(this.localMemory.rnp_vert.toFixed(2), 830 * this.wUnit, 725 * this.hUnit);
+    }
+    if (this.localMemory.anp_vert != null) {
+      this.backCtx.fillText('ANP', 830 * this.wUnit, 775 * this.hUnit);
+      this.backCtx.fillText(this.localMemory.anp_vert.toFixed(2), 830 * this.wUnit, 805 * this.hUnit);
+    }
 
     // Lateral RNP and ANP Labels With Data
     this.backCtx.font = Math.round(32 * this.wUnit) + 'px Arial';
     this.backCtx.fillStyle = '#5afc03';
-    this.backCtx.fillText('RNP', 410 * this.wUnit, 950 * this.hUnit);
-    this.backCtx.fillText(this.localMemory.rnp_lat.toFixed(2), 410 * this.wUnit, 980 * this.hUnit);
-    this.backCtx.fillText('ANP', 520 * this.wUnit, 950 * this.hUnit);
-    this.backCtx.fillText(this.localMemory.anp_lat.toFixed(2), 520 * this.wUnit, 980 * this.hUnit);
+    if (this.localMemory.rnp_lat != null) {
+      this.backCtx.fillText('RNP', 410 * this.wUnit, 950 * this.hUnit);
+      this.backCtx.fillText(this.localMemory.rnp_lat.toFixed(2), 410 * this.wUnit, 980 * this.hUnit);
+    }
+    if (this.localMemory.anp_lat != null) {
+      this.backCtx.fillText('ANP', 520 * this.wUnit, 950 * this.hUnit);
+      this.backCtx.fillText(this.localMemory.anp_lat.toFixed(2), 520 * this.wUnit, 980 * this.hUnit);
+    }
 
     // Compass arc
     this.foreCtx.strokeStyle = 'white';

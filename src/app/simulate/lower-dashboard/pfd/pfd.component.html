@@ -14,9 +14,9 @@
     <div class='guage' id='fo_cws_roll' [style.display]='localMemory.fo_cws_roll ? "block" : "none"'>CWS R</div>
     <div class='guage' id='fo_cws_pit' [style.display]='localMemory.fo_cws_pit ? "block" : "none"'>CWS P</div>
 
-    <div class='guage' id='mcp_ias_mach_ds'> {{ localMemory.mcp_ias_mach_ds }} </div>
+    <div class='guage' id='mcp_ias_mach_ds'> {{ localMemory.mcp_ias_mach_ds | number: '1.0-0' }} </div>
 
-    <div class='guage' id='cal_as'> {{ localMemory.cal_as }} </div>
+    <div class='guage' id='cal_as'> {{ localMemory.cal_as | number: '1.0-0' }} </div>
 
     <div class='guage' id='mcp_alt_ds'> {{ localMemory.mcp_alt_ds }} </div>
 
@@ -31,11 +31,8 @@
 
     <div class='guage' id='fo_ap_stat'> {{ localMemory.fo_ap_stat }} </div>
 
-    <div class='guage' id='radio_alt'> {{ localMemory.radio_alt }} </div>
+    <div class='guage' id='radio_alt'> {{ localMemory.radio_alt | noComma }} </div>
 
-    <div class='guage' id='mcp_hdg_ds'> {{ localMemory.mcp_hdg_ds }} H</div>
+    <div class='guage' id='mcp_hdg_ds'> {{ localMemory.mcp_hdg_ds | number: '1.0-1'}} H</div>
     <div class='guage' id='mag_trk_label'>MAG</div>
-    
-
-
 </div>

@@ -1,3 +1,4 @@
+import { PfdSharingService } from './../../data-sharing/pfd-sharing.service';
 import { PfdMemory } from './pfd-memory';
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 
@@ -49,38 +50,38 @@ export class PfdComponent implements AfterViewInit {
    * component. */
   public localMemory: PfdMemory;
 
-  constructor() {
+  constructor(private sharingService: PfdSharingService) {
     // Initialize with starting memory
     this.localMemory = {
-      at_eng_mode: 'MCP SPD',
-      fo_roll_eng: 'VOR/LOC',
-      fo_roll_arm: 'LNAV',
-      fo_pit_eng: 'G/S',
-      fo_pit_arm: 'FLARE',
+      at_eng_mode: null,
+      fo_roll_eng: null,
+      fo_roll_arm: null,
+      fo_pit_eng: null,
+      fo_pit_arm: null,
 
-      fo_cws_pit: false,
-      fo_cws_roll: false,
-      mcp_fd_2: true,
+      fo_cws_pit: null,
+      fo_cws_roll: null,
+      mcp_fd_2: null,
 
-      fo_ap_stat: 'CMD',
+      fo_ap_stat: null,
 
-      fo_cmd_pit_dev: 0,
-      fo_cmd_roll_dev: 0,
-      ils_2_gs_dev: 0,
-      ils_2_loc_dev: 0,
-      mcp_ias_mach_ds: 146,
-      mcp_alt_ds: 8800,
-      mcp_vert_spd_ds: 100,
-      fo_ef_baro_cur: 1013,
-      cal_as: 150,
-      rate_of_clb: 250,
-      pres_alt: 8900,
-      radio_alt: 8800,
-      pitch_angle: 0,
-      roll_angle: 0,
-      hdg_angle: 0,
-      mcp_hdg_ds: 330,
-      mag_track_angle: 0
+      fo_cmd_pit_dev: null,
+      fo_cmd_roll_dev: null,
+      ils_2_gs_dev: null,
+      ils_2_loc_dev: null,
+      mcp_ias_mach_ds: null,
+      mcp_alt_ds: null,
+      mcp_vert_spd_ds: null,
+      fo_ef_baro_cur: null,
+      cal_as: null,
+      rate_of_clb: null,
+      pres_alt: null,
+      radio_alt: null,
+      pitch_angle: null,
+      roll_angle: null,
+      hdg_angle: null,
+      mcp_hdg_ds: null,
+      mag_track_angle: null
     };
   }
 
@@ -91,6 +92,11 @@ export class PfdComponent implements AfterViewInit {
     this.backCtx = this.backgroundCanvas.nativeElement.getContext('2d');
     this.foreCtx = this.foregroundCanvas.nativeElement.getContext('2d');
     this.render();
+
+    this.sharingService.currentMemory.subscribe(memory => {
+      this.localMemory = memory;
+      this.render();
+    });
   }
 
   /* Animate the component. */
@@ -612,6 +618,9 @@ export class PfdComponent implements AfterViewInit {
 
   /* Calculate revised altitude. */
   calculateRevisedAltitude(): string {
+    if (this.localMemory.fo_ef_baro_cur == null || this.localMemory.pres_alt == null) {
+      return '';
+    }
     const value = ((this.localMemory.fo_ef_baro_cur - 1013) * 28) + this.localMemory.pres_alt;
     return (value).toFixed(0);
   }

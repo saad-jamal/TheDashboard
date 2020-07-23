@@ -1,5 +1,12 @@
+import { OptionsSharingService } from './simulate/data-sharing/options-sharing.service';
+import { McpSharingService } from './simulate/data-sharing/mcp-sharing.service';
+import { PfdSharingService } from './simulate/data-sharing/pfd-sharing.service';
+import { NdSharingService } from './simulate/data-sharing/nd-sharing.service';
+import { MiscSharingService } from './simulate/data-sharing/misc-sharing.service';
+import { SimulateService } from './simulate/simulate.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +23,7 @@ import { UpperEicasComponent } from './simulate/lower-dashboard/upper-eicas/uppe
 import { LowerEicasComponent } from './simulate/lower-dashboard/lower-eicas/lower-eicas.component';
 import { ControllerComponent } from './simulate/controls/controller/controller.component';
 import { OptionsComponent } from './simulate/controls/options/options.component';
+import { NoCommaPipe } from './simulate/lower-dashboard/pfd/no-comma.pipe';
 
 
 @NgModule({
@@ -35,12 +43,15 @@ import { OptionsComponent } from './simulate/controls/options/options.component'
     LowerEicasComponent,
     ControllerComponent,
     OptionsComponent,
+    NoCommaPipe,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [SimulateService, MiscSharingService, NdSharingService,
+    PfdSharingService, McpSharingService, OptionsSharingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { McpSharingService } from './../../data-sharing/mcp-sharing.service';
+import { Component, OnInit } from '@angular/core';
 import { McpMemory } from './mcp-memory';
-import { renderFlagCheckIfStmt } from '@angular/compiler/src/render3/view/template';
+
 @Component({
   selector: 'app-mcp',
   templateUrl: './mcp.component.html',
@@ -12,7 +13,7 @@ import { renderFlagCheckIfStmt } from '@angular/compiler/src/render3/view/templa
  *
  * @author Saad Jamal
  */
-export class McpComponent {
+export class McpComponent implements OnInit {
 
   /* A singular unit of pixels that scales with the screen. Equals to
    * 1/1000th of the component width. */
@@ -22,46 +23,44 @@ export class McpComponent {
    * component. */
   public localMemory: McpMemory;
 
-  constructor() {
+  constructor(private sharingService: McpSharingService) {
     // Initialize with starting memory.
     this.localMemory = {
       // Displays
-      mcp_ias_mach_ds: 146,
-      mcp_hdg_ds: 355,
-      mcp_alt_ds: 27000,
-      mcp_vert_spd_ds: 1500,
-      mcp_crs_1_ds: 355,
-      mcp_crs_2_ds: 355,
+      mcp_ias_mach_ds: null,
+      mcp_hdg_ds: null,
+      mcp_alt_ds: null,
+      mcp_vert_spd_ds: null,
+      mcp_crs_1_ds: null,
+      mcp_crs_2_ds: null,
 
       // Buttons
-      mcp_n1: false,
-      mcp_spd: true,
-      mcp_lvl_spd: false,
-      mcp_vnav: false,
-      mcp_lnav: false,
-      mcp_vor_loc: false,
-      mcp_apprh: false,
-      mcp_hdg_sel: false,
-      mcp_alt_hld: false,
-      mcp_vert_spd: false,
-      mcp_cmd_a: true,
-      mcp_cmd_b: true,
-      mcp_cws_a: false,
-      mcp_cws_b: false,
+      mcp_n1: null,
+      mcp_spd: null,
+      mcp_lvl_spd: null,
+      mcp_vnav: null,
+      mcp_lnav: null,
+      mcp_vor_loc: null,
+      mcp_apprh: null,
+      mcp_hdg_sel: null,
+      mcp_alt_hld: null,
+      mcp_vert_spd: null,
+      mcp_cmd_a: null,
+      mcp_cmd_b: null,
+      mcp_cws_a: null,
+      mcp_cws_b: null,
 
       // Switches
-      mcp_fd_1: true,
-      mcp_fd_2: false,
-      mcp_at_arm: false
+      mcp_fd_1: null,
+      mcp_fd_2: null,
+      mcp_at_arm: null
     };
   }
 
   /* Updates component with updatedMemory. If input param and stored local memory
    * are equal, does nothing. */
   update(updatedMemory: McpMemory): void {
-    if (this.isEquivalent(updatedMemory, this.localMemory)) {
-      return;
-    }
+    this.localMemory = updatedMemory;
     this.render();
   }
 
@@ -71,26 +70,12 @@ export class McpComponent {
   }
 
   /* Foreground of component. Changes during play-back. */
-  drawForeground(): void {
-    console.log('Murph');
-  }
+  drawForeground(): void {}
 
-  /* Brute force check if two objects are equal. */
-  isEquivalent(a: object, b: object): boolean {
-    // Create arrays of property names
-    const aProps = Object.getOwnPropertyNames(a);
-    const bProps = Object.getOwnPropertyNames(b);
-
-    // If number of properties is different, obviously unequal
-    if (aProps.length !== bProps.length) {
-      return false;
-    }
-
-    for (const propName of aProps) {
-      if (a[propName] !== b[propName]) {
-        return false;
-      }
-    }
-    return true;
+  ngOnInit() {
+    this.sharingService.currentMemory.subscribe(memory => {
+      this.localMemory = memory;
+      this.render();
+    });
   }
 }

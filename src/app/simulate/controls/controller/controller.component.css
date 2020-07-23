@@ -4,7 +4,7 @@
     height: 50%;
 
     position: absolute;
-    left: 7%;
+    left: 7.5%;
     top: 25%;
 
     cursor: pointer;
@@ -87,10 +87,10 @@
 /* #### Time Displays #### */
 #realTime {
     position: absolute;
-    left: 41%;
+    left: 37%;
     top: 75%;
 
-    width: 25%;
+    width: 35%;
     height: 22%;
 
     border: none;
@@ -106,14 +106,14 @@
     left: 85.5%;
     top: 32%;
 
-    width: 14.5%;
+    width: 15%;
     height: 18%;
 
     border: none;
     background-color: transparent;
 
     font-family: "Times New Roman";
-    font-size: 1.4vh;
+    font-size: 1.3vh;
     text-align: left;
 }
 
@@ -122,13 +122,13 @@
     left: 85.5%;
     top: 52%;
 
-    width: 14.5%;
+    width: 15%;
     height: 18%;
 
     border: none;
     background-color: transparent;
 
     font-family: "Times New Roman";
-    font-size: 1.4vh;
+    font-size: 1.3vh;
     text-align: left;
 }
