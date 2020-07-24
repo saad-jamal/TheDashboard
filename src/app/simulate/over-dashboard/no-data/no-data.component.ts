@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { NoDataSharingService } from './../../data-sharing/no-data-sharing.service';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-no-data',
@@ -11,11 +12,23 @@ import { Component, OnInit } from '@angular/core';
  *
  * @author Saad Jamal
  */
-export class NoDataComponent implements OnInit {
+export class NoDataComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  /* If we do not have data about a fixation this should be true. */
+  public highlighted: boolean;
+
+  constructor(private sharingService: NoDataSharingService) {
+    this.highlighted = false;
+  }
 
   ngOnInit(): void {
+  }
+
+  /* The ViewChild annotations apply during the ngAfterViewInit stage. */
+  ngAfterViewInit(): void {
+    this.sharingService.currentMemory.subscribe(memory => {
+      this.highlighted = memory;
+    });
   }
 
 }

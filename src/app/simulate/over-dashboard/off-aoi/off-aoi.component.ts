@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { OffAoiSharingService } from './../../data-sharing/off-aoi-sharing.service';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-off-aoi',
@@ -11,11 +12,23 @@ import { Component, OnInit } from '@angular/core';
  *
  * @author Saad Jamal
  */
-export class OffAoiComponent implements OnInit {
+export class OffAoiComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  /* If the pilot views AoI this should be true. */
+  public highlighted: boolean;
+
+  constructor(private sharingService: OffAoiSharingService) {
+    this.highlighted = false;
+  }
 
   ngOnInit(): void {
+  }
+
+  /* The ViewChild annotations apply during the ngAfterViewInit stage. */
+  ngAfterViewInit(): void {
+    this.sharingService.currentMemory.subscribe(memory => {
+      this.highlighted = memory;
+    });
   }
 
 }

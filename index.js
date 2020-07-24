@@ -11,6 +11,7 @@ const app = express();
 const fs = require('fs-extra');
 const JSONStream = require('JSONStream');
 const fileUpload = require('express-fileupload');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 
 
@@ -20,6 +21,8 @@ app.set('port', process.env.PORT || 4201);
 /* Express App Settings. */
 app.use(fileUpload());
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 /* Send stock string on home page. */
 app.get('/', function(req, res) {
@@ -32,7 +35,7 @@ app.post('/sim-upload', function(req, res) {
     if (!req.files || Object.keys(req.files).length === 0) {
         return res.status(400).send('No files were uploaded.');
     }
-    fs.emptyDir('src/assets/data/');
+    fs.emptyDirSync('src/assets/data/');
     let sampleFile = req.files.sampleFile;
     expirementName = req.files.sampleFile.name.slice(0, -4);
     simDataInfo.expirementName = expirementName;
@@ -56,7 +59,7 @@ app.post('/event-upload', function(req, res) {
     if (!req.files || Object.keys(req.files).length === 0) {
         return res.status(400).send('No files were uploaded.');
     }
-    fs.emptyDir('src/assets/events/');
+    fs.emptyDirSync('src/assets/events/');
     let sampleFile = req.files.sampleFile;
     if (sampleFile.name.slice(-4) !== '.csv') {
         return res.status(500).send("Must upload CSV files.");
@@ -68,6 +71,41 @@ app.post('/event-upload', function(req, res) {
         console.log("Uploading file: " + sampleFile.name);
         res.redirect('http://localhost:4200/initialize');
     });
+});
+
+/** When client selects 'Download Events', a POST request is made to
+ *  download a CSV file of the indicators.
+ */
+app.post('/event-download', function(req, res) {
+    if (req.body != null) {
+        let eventFlags = req.body;
+        let headers = '';
+        for (key in eventFlags[0]) {
+            headers = headers + key + ',';
+        }
+        headers = headers.substring(0, headers.length - 1);
+    
+        let output = headers + '\n';
+        for (let i = 0; i < eventFlags.length; i++) {
+            let line = '';
+            for (key in eventFlags[i]) {
+                let value = eventFlags[i][key];
+                line = line + value + ',';
+            }
+            line = line.substring(0, line.length - 1);
+            output = output + line + '\n';
+        }
+    
+        console.log('Writing event indicators to file.');
+    
+        fs.writeFile('src/assets/events/event_markers_' + simDataInfo.expirementName.slice(9) + '.csv', output, function(err) {
+            if (err) throw err;
+        });
+    
+        res.sendStatus(200);
+    } else {
+        console.log('Nothing to download.');
+    }
 });
 
 /** When client uploads video files to server it should be stored 
@@ -83,7 +121,7 @@ app.post('/event-upload', function(req, res) {
      if (sampleFile.name.slice(-4) !== '.mp4') {
         return res.status(500).send("Must upload MP4 files.");
     }
-     sampleFile.mv("src/assets/video/" + sampleFile.videoName + ".mp4", function(err) {
+     sampleFile.mv("src/assets/video/" + simDataInfo.videoName + ".mp4", function(err) {
          if (err) {
              return res.status(500).send(err);
          }
@@ -95,9 +133,40 @@ app.post('/event-upload', function(req, res) {
  /** When client loads simulate page, they should be informed of
   *  what data is pre-loaded in the app. */
  app.get('/sim-info', function(req, res) {
-     console.log('Request has been made');
     res.send(simDataInfo);
  });
+
+ /** When client loads simulate page, they should receive
+  *  JSON of all event indicators loaded on disk.
+  */
+ app.get('/events', function(req, res) {
+    if (!fs.existsSync('src/assets/events/event_markers_' + simDataInfo.expirementName.slice(9) + '.csv')) {
+        console.log('No previously recorded events.');
+        console.log('src/assets/events/event_markers_' + simDataInfo.expirementName.slice(9) + '.csv');
+        res.send([]);
+    } else {
+        let bufferString = fs.readFileSync('src/assets/events/event_markers_' + simDataInfo.expirementName.slice(9) + '.csv', 'utf8');
+        let arr = bufferString.split('\n');
+        let jsonObj = [];
+        let headers = arr[0].split(',');
+        for (let i = 1; i < arr.length; i++) {
+            if (arr[i] === "" || arr[i] === ",") {
+                continue;
+            }
+            let data = arr[i].split(',');
+            let obj = {};
+            for (let j = 0; j < data.length; j++) {
+                if (headers[j].trim() === "color" && data[j].trim() === "") {
+                    obj[headers[j].trim()] = 'red';
+                } else {
+                    obj[headers[j].trim()] = data[j].trim();
+                }
+            }
+            jsonObj.push(obj);
+        }
+        res.send(jsonObj);
+    }
+ })
 
 app.listen(app.get('port'), function() {
     console.log("Application listening at http://localhost:4201");

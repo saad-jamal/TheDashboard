@@ -1,0 +1,459 @@
+/* #### Controller #### */
+#controllerDiv {
+    position: absolute;
+    left: 45.5%;
+    top: 88.5%;
+
+    width: 54%;
+    height: 10.5%;
+
+    background-color: white;
+    border: 1px solid black;
+}
+
+/* Play-back Control Buttons */
+#play {
+    width: 4.5%;
+    height: 50%;
+
+    position: absolute;
+    left: 7.5%;
+    top: 25%;
+
+    cursor: pointer;
+}
+
+#play:hover {
+    transform: scale(1.05);
+}
+
+#backward {
+    width: 3%;
+    height: 30%;
+
+    position: absolute;
+    left: 2%;
+    top: 35%;
+
+    cursor: pointer;
+}
+
+#backward:hover {
+    transform: scale(1.1);
+}
+
+#forward {
+    width: 3%;
+    height: 30%;
+
+    position: absolute;
+    left: 13.5%;
+    top: 35%;
+
+    cursor: pointer;
+}
+
+#forward:hover {
+    transform: scale(1.1);
+}
+
+/* Slider Bar */
+
+.sliderContainer {
+    position: absolute;
+    left: 20%;
+    top: 44%;
+
+    width: 65%;
+    height: 15%;
+
+    border: none;
+    background-color: white;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 100%;
+    background: #d3d3d3;
+    border: 1px solid black;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    outline: none;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 2%;
+    height: 4vh;
+    background: white;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+/* Time Displays */
+#realTime {
+    position: absolute;
+    left: 37%;
+    top: 75%;
+
+    width: 35%;
+    height: 22%;
+
+    border: none;
+    background-color: white;
+
+    font-family: "Times New Roman";
+    font-size: 1.6vh;
+    text-align: center;
+}
+
+#elapsedSeconds {
+    position: absolute;
+    left: 85.5%;
+    top: 32%;
+
+    width: 15%;
+    height: 18%;
+
+    border: none;
+    background-color: transparent;
+
+    font-family: "Times New Roman";
+    font-size: 1.3vh;
+    text-align: left;
+}
+
+#elapsedTime {
+    position: absolute;
+    left: 85.5%;
+    top: 52%;
+
+    width: 15%;
+    height: 18%;
+
+    border: none;
+    background-color: transparent;
+
+    font-family: "Times New Roman";
+    font-size: 1.3vh;
+    text-align: left;
+}
+
+/* #### Options Menu #### */
+#optionsDiv {
+    position: absolute;
+    left: 0.5%;
+    top: 88.5%;
+
+    width: 11.5%;
+    height: 10.5%;
+
+    background-color: white;
+    border: 1px solid black;
+}
+
+.option {
+    width: 22%;
+    height: 45%;
+
+    top: 53%;
+}
+
+.option:hover {
+    transform: scale(1.08);
+}
+#tv {
+    position: absolute;
+    left: 2%;
+
+    cursor: pointer;
+}
+
+#speaker {
+    position: absolute;
+    left: 27%;
+
+    cursor: pointer;
+}
+
+#gear {
+    position: absolute;
+    left: 53%;
+
+    cursor: pointer;
+}
+
+#events {
+    position: absolute;
+    left: 77%;
+
+    cursor: pointer;
+}
+
+/* Data Information */
+#selectedData {
+    position: absolute;
+    left: 2%;
+    top: 2%;
+
+    width: 99%;
+    height: 16%;
+
+    text-align: left;
+    font-family: "Times New Roman";
+    font-size: 1.4vh;
+
+    border: none;
+    background: transparent;
+}
+
+#selectedVideo {
+    position: absolute;
+    left: 2%;
+    top: 20%;
+
+    width: 99%;
+    height: 16%;
+
+    text-align: left;
+    font-family: "Times New Roman";
+    font-size: 1.4vh;
+
+    border: none;
+    background: transparent;
+}
+
+/* Video Div */
+#vidDiv {
+    position: absolute;
+    left: 0.25%;
+    top: 59%;
+
+    width: 24%;
+    height: 34.5%;
+
+    border: 2px solid;
+    background: white;
+    
+    display: none;
+}
+
+video {
+    width: 100%;
+}
+
+/* Settings Div */
+#settingsDiv {
+    position: absolute;
+    left: 40%;
+    top: 30%;
+
+    width: 19%;
+    height: 31%;
+
+    border: 2px solid;
+    background: white;
+
+    display: none;
+}
+
+#settingsHeader {
+    position: absolute;
+    left: 0%;
+    top: -2%;
+
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+}
+
+#videoOffsetLabel {
+    position: absolute;
+    left: 12%;
+    top: 23%;
+
+    font-weight: 200;
+    font-size: 1.9vh;
+}
+
+#videoOffset {
+    position: absolute;
+    left: 55%;
+    top: 23%;
+
+    width: 30%;
+    font-size: 1.5vh;
+}
+
+#simOffsetLabel {
+    position: absolute;
+    left: 12%;
+    top: 35%;
+
+    font-weight: 200;
+    font-size: 1.9vh;
+}
+
+#simOffset {
+    position: absolute;
+    left: 55%;
+    top: 35%;
+
+    width: 30%;
+    font-size: 1.5vh;
+}
+
+#submitSettings {
+    position: absolute;
+    left: 40%;
+    top: 85%;
+
+    width: 19%;
+
+    font-size: 1.7vh
+}
+
+#vidControlsLabel {
+    position: absolute;
+    left: 12%;
+    top: 47%;
+
+    font-weight: 200;
+    font-size: 1.9vh;
+}
+
+#vidControls {
+    position: absolute;
+    left: 54%;
+    top: 48%;
+}
+
+#linearFixationsLabel {
+    position: absolute;
+    left: 12%;
+    top: 59%;
+
+    font-weight: 200;
+    font-size: 1.9vh;
+}
+
+#linearFixations {
+    position: absolute;
+    left: 54%;
+    top: 60%;
+}
+
+#alertIndicatorsLabel {
+    position: absolute;
+    left: 12%;
+    top: 71%;
+
+    font-weight: 200;
+    font-size: 1.9vh;
+}
+
+#alertIndicators {
+    position: absolute;
+    left: 54%;
+    top: 72%;
+}
+
+/* Events Div */
+#eventsDiv {
+    position: absolute;
+    left: 41%;
+    top: 38%;
+
+    width: 19%;
+    height: 18%;
+
+    border: 2px solid;
+    background: white;
+
+    display: none;
+}
+
+#eventsHeader {
+    position: absolute;
+    left: 0%;
+    top: -10%;
+
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+    font-size: 3vh
+}
+
+#eventTimeLabel {
+    position: absolute;
+    left: 3%;
+    top: 35%;
+
+    font-weight: 200;
+    font-size: 1.9vh;
+}
+
+#eventTime {
+    position: absolute;
+    left: 18%;
+    top: 36%;
+
+    width: 14%;
+    height: 18%;
+    font-size: 1.5vh;
+}
+
+#eventMessageLabel {
+    position: absolute;
+    left: 33%;
+    top: 35%;
+
+    font-weight: 200;
+    font-size: 1.9vh;
+}
+
+#eventMessage {
+    position: absolute;
+    left: 55%;
+    top: 35%;
+
+    width: 25%;
+    height: 35%;
+    font-size: 1.5vh;
+}
+
+#colorSelector {
+    position: absolute;
+    left: 81%;
+    top: 35%;
+
+    width: 18%;
+}
+
+#addEvent {
+    position: absolute;
+    left: 81%;
+    top: 48%;
+    font-size: 1.3vh;
+}
+
+#downloadIndicators {
+    position: absolute;
+    left: 3%;
+    top: 75%;
+    font-size: 1.3vh;
+}
+
+#clearIndicators {
+    position: absolute;
+    left: 41%;
+    top: 75%;
+    font-size: 1.3vh;
+}

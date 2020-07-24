@@ -1,0 +1,69 @@
+<div id="controllerDiv">
+    <img id='play' [src]="!playing ? 'assets/img/play.png' : 'assets/img/pause.png'" (click)="play()">
+    <img id='backward' src='assets/img/backward.png' (click)="backward()">
+    <img id='forward' src='assets/img/forward.png' (click)="forward()">
+
+    <div #eventContainer class='sliderContainer' id='eventContainer'>
+        <input #ref type='range' min='0' [max]='this.memoryLength' [value]='this.index'  class='slider' id='boxed' (change)='sliderInput(ref.value)'>
+    </div>
+    
+    <div id='realTime'>Real Time: {{ this.realTime }}</div>
+    <div id='elapsedSeconds'>Elapsed Seconds: {{ this.elapsedSeconds | number: '1.1-1'}}</div>
+    <div id='elapsedTime'>Elapsed Time: {{ this.formatTime(this.elapsedSeconds) }}</div>
+</div>
+
+<div id="optionsDiv">
+    <div id='selectedData'>{{ this.diskInfo.expirementName }}</div>
+    <div id='selectedVideo'>{{ this.diskInfo.videoName }}</div>
+
+    <img class='option' id='tv' src='assets/img/tv.png' (click)="this.displayVidDiv()">
+    <img class='option' id='speaker' [src]="this.audioActive ? 'assets/img/speaker.png' : 'assets/img/mute.png'" (click)='this.toggleAudio()'>
+    <img class='option' id='gear' src='assets/img/gear.png' (click)="this.displaySettingsDiv()">
+    <img class='option' id='events' src='assets/img/pin.png' (click)="this.displayEventsDiv()">
+</div>
+
+<div id="settingsDiv" [style.display]='this.displaySettings ? "block" : "none"'>
+    <h1 id="settingsHeader"><u>Settings:</u></h1>
+
+    <label for="videoOffset" id="videoOffsetLabel">Video Offset:</label>
+    <input #vidOffset type="text" id="videoOffset" name="videoOffset">
+
+    <label for="simOffset" id="simOffsetLabel">Sim. Data Offset:</label>
+    <input #simOffset type="text" id="simOffset" name="simOffsetInput">
+
+    <label for="vidControls" id="vidControlsLabel">Video Controls:</label>
+    <input #vidControls type="checkbox" id="vidControls" name="vidControls">
+
+    <label for="linearFixations" id="linearFixationsLabel">Linear Fixations:</label>
+    <input #linearFixations type="checkbox" id="linearFixations" name="linearFixations">
+
+    <label for="alertIndicators" id="alertIndicatorsLabel">Alert Indicators:</label>
+    <input #alertIndicators type="checkbox" id="alertIndicators" name="alertIndicators">
+
+    <input id="submitSettings" type="submit" value="Apply" (click)="this.submitSettings()">
+</div>
+
+<div id="vidDiv" [style.display]='this.displayVideo ? "block" : "none"'>
+    <video #vid id='vid' preload='auto' [controls]="this.displayControls"></video>
+</div>
+
+<div id="eventsDiv" [style.display]='this.displayEvents ? "block" : "none"'>
+    <h1 id="eventsHeader"><u>Event Indicators:</u></h1>
+
+    <label for="eventTime" id="eventTimeLabel">Time:</label>
+    <input #eventTime type="text" id="eventTime" name="eventTime">
+
+    <label for="eventMessage" id="eventMessageLabel">Message:</label>
+    <textarea #eventMessage name="eventMessage" id="eventMessage" cols="40" rows="5"></textarea>
+
+    <select #colorSelector id="colorSelector">
+        <option value="red">Red</option>
+        <option value="yellow">Yellow</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+    </select>
+
+    <input id="addEvent" type="submit" value="Add" (click)="addEvent()">
+    <input id="downloadIndicators" type="submit" value="Download Events" (click)="downloadEvents()">
+    <input id="clearIndicators" type="submit" value="Clear Event Markers" (click)="clearEvents()">
+</div>

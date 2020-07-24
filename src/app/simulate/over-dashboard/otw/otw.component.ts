@@ -54,6 +54,10 @@ export class OtwComponent implements AfterViewInit {
 
   /* Background of the component. This won't change during play-back. */
   drawBackground(): void {
+    this.ctx.fillStyle = '#505050';
+    this.ctx.strokeStyle = 'black';
+    this.ctx.lineWidth = 1;
+
     // Left Window Frame
     this.ctx.beginPath();
     this.ctx.moveTo(0, 0);

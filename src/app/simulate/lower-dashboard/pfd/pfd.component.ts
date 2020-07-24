@@ -15,6 +15,7 @@ import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
  * @author Saad Jamal
  */
 export class PfdComponent implements AfterViewInit {
+
   /* Div element encapsulating this component. */
   @ViewChild('pfdDiv') pfdDiv: ElementRef<HTMLDivElement>;
 

@@ -65,26 +65,26 @@ div  {
     height: 58%;
 }
 
-#controllerDiv {
+#computerDiv {
     position: absolute;
-    left: 45.5%;
-    top: 88.5%;
+    left: 0%;
+    top: 0%;
 
-    width: 54%;
-    height: 10.5%;
+    width: 100%;
+    height: 100%;
 
-    background-color: white;
-    border: 1px solid black;
+    background-color: transparent;
+    border: none;
 }
 
-#optionsDiv {
+#eyeDiv {
     position: absolute;
-    left: 0.5%;
-    top: 88.5%;
+    left: 12.5%;
+    top: 1%;
 
-    width: 11.5%;
-    height: 10.5%;
+    width: 87%;
+    height: 98%;
 
-    background-color: white;
-    border: 1px solid black;
+    background-color: transparent;
+    border: none;
 }

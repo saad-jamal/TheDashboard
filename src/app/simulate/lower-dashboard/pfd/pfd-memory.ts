@@ -1,7 +1,7 @@
-/* The PfdMemory is an object that stores the relevant sim data
- * variables for the PFD component.
+/** The PfdMemory is an object that stores the relevant sim data
+ *  variables for the PFD component.
  *
- * @author Saad Jamal
+ *  @author Saad Jamal
  */
 export interface PfdMemory {
     at_eng_mode: string;

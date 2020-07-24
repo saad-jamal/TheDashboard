@@ -33,4 +33,12 @@ export class SimulateService {
     return this.http.get('/assets/data/sim.json');
   }
 
+  postEventIndicators(toPostJSON: any): Observable<any> {
+    return this.http.post('http://localhost:4201/event-download', toPostJSON);
+  }
+
+  getEventIdicators(): Observable<any> {
+    return this.http.get('http://localhost:4201/events')
+  }
+
 }

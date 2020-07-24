@@ -1,4 +1,3 @@
-import { OptionsSharingService } from './simulate/data-sharing/options-sharing.service';
 import { McpSharingService } from './simulate/data-sharing/mcp-sharing.service';
 import { PfdSharingService } from './simulate/data-sharing/pfd-sharing.service';
 import { NdSharingService } from './simulate/data-sharing/nd-sharing.service';
@@ -21,9 +20,9 @@ import { MiscComponent } from './simulate/side-dashboard/misc/misc.component';
 import { FmsComponent } from './simulate/lower-dashboard/fms/fms.component';
 import { UpperEicasComponent } from './simulate/lower-dashboard/upper-eicas/upper-eicas.component';
 import { LowerEicasComponent } from './simulate/lower-dashboard/lower-eicas/lower-eicas.component';
-import { ControllerComponent } from './simulate/controls/controller/controller.component';
-import { OptionsComponent } from './simulate/controls/options/options.component';
 import { NoCommaPipe } from './simulate/lower-dashboard/pfd/no-comma.pipe';
+import { ComputerComponent } from './simulate/controls/computer/computer.component';
+import { EyetrackingComponent } from './simulate/eye/eyetracking/eyetracking.component';
 
 
 @NgModule({
@@ -41,9 +40,9 @@ import { NoCommaPipe } from './simulate/lower-dashboard/pfd/no-comma.pipe';
     FmsComponent,
     UpperEicasComponent,
     LowerEicasComponent,
-    ControllerComponent,
-    OptionsComponent,
     NoCommaPipe,
+    ComputerComponent,
+    EyetrackingComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +50,7 @@ import { NoCommaPipe } from './simulate/lower-dashboard/pfd/no-comma.pipe';
     HttpClientModule
   ],
   providers: [SimulateService, MiscSharingService, NdSharingService,
-    PfdSharingService, McpSharingService, OptionsSharingService],
+    PfdSharingService, McpSharingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
