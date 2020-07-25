@@ -179,6 +179,10 @@ simDataInfo = {
     videoName: ""
 }
 
+if (!fs.existsSync('src/assets/data')) {
+    fs.mkdirSync('src/assets/data');
+}
+
 /* We need to initially read all the files of data we have in order to
  * initialize the simDataInfo object. */
 fs.readdir('src/assets/data', function(err, files) {
@@ -189,6 +193,10 @@ fs.readdir('src/assets/data', function(err, files) {
 	}
 });
 
+if (!fs.existsSync('src/assets/video')) {
+    fs.mkdirSync('src/assets/video');
+}
+
 fs.readdir('src/assets/video', function(err, files) {
 	for (i = 0; i < files.length; i++) {
 		if (files[i].slice(-4) == ".mp4") {
@@ -196,6 +204,10 @@ fs.readdir('src/assets/video', function(err, files) {
 		}
 	}
 });
+
+if (!fs.existsSync('src/assets/events')) {
+    fs.mkdirSync('src/assets/events');
+}
 
 
 /* This function converts a CSV file into a JSON. */
