@@ -1,25 +1,10 @@
 # TheDashboard
-This github repository represents the re-build of TheDashboard. A data analysis tool used to display eye and simulator data of a Boeing 737NG. 
-## The Re-Build Plan
-In order to successfully re-build the application, roughly two and a half weeks will be needed. On top of that, a couple days to a full week is expected to resolve any possible bugs that present themselves.
-### Week One: The Modeling Phase
-In this phase I will rebuild each of the instruments as objects. There will be a hierarchical structure where the PFD is the parent class of the attitude indicator for example. I will also improve graphics.
-**Key Dates:**
-June 8: Intensive modeling day. Spend time planning the fields, dependencies, and methods each class will have.
-June 9: Have a blank instrument panel. Similar to first version of framebuild. Improve underlying graphics.
-June 10: Finish MCP class.
-June 11: Finish PFD Class
-June 12: Finish ND class. Write HTML for other buttons and pages. Combine classes into one page.
-### Week Two: The Services Phase
-In this phase I will handle manipulating the CSV data, storing it, and reading it at 20 or 60 Hz (TBD) I will build Angular Services and Directives to feed data into each instrument.
-**Key Dates**
-June 17: Be able to read data from CSV file and have each instrument read the variables it needs.
-June 18: Play data at selected frequency. Build control menu with play, forward, and slider functionality.
-June 19: Build functionality of misc. buttons. (Event indicators, settings tab)
-### Week Three: Bugs & Synchronization Fixes
-June 23: Have fully functional, synchronized tool ready to present. Meet with Peter to run a couple simulations and work through bugs.
-June 25: Resolve all bugs.
-June 26: Buffer.
+This github repository represents the re-build of TheDashboard. A data analysis tool used to display eye and simulator data of a Boeing 737NG. The application uses Angular on the Front-End combined with HTML Canvas to create a visualization of key simulator data variables, overlayed with eye fixations of a given pilot, synchronized with over the shoulder video data.
+## Installation Instructions
+Clone the application on Git, or simply download the zipfile off of Github. Navigate to the directory on terminal and type 'npm install'. This will install all dependencies. In order to start the application type 'npm start'. Using the browser of your choice, navigate to http://localhost:4200 where the application is hosted.
+## Required Data
+The application takes in simulator data, which should have eye-tracking data alongside it. It also requires over-the-shoulder mp4 file. It can also load up a file of event-markers. This is a CSV where each row has a time, message, and color. These events will show up on the slider bar and will alert the user and pause play-back at select times.
 
 ---
-Throughout the course of this plan, I will continue to attend data analysis sessions with Randy. Resolving any bugs from version 1.0 of the project to keep the analysis sessions smooth will be my first priority. After that I'll continue porting to Angular on the side.
+
+This application was developed by NASA Ames in conjunction with the Department of Data Science at UC Berkeley.
