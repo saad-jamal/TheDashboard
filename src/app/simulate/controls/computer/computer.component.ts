@@ -21,7 +21,7 @@ import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-computer',
-  templateUrl: './computer.component.html', 
+  templateUrl: './computer.component.html',
   styleUrls: ['./computer.component.css']
 })
 /**
@@ -723,7 +723,7 @@ export class ComputerComponent implements OnInit, AfterViewInit {
     };
     this.events.push(eventObject);
 
-    const xShift = ((eventObject.time * 6000) / this.memoryLength) + (10 * 6000 / this.memoryLength);
+    const xShift = ((eventObject.time * 6000) / this.memoryLength) + (5 * 6000 / this.memoryLength);
 
     const htmlString: string = '<div style="background-color: ' + eventObject.color
       + '; position: absolute; left: ' + xShift + '%; top: -100%; width: 0.75%; height: 300%; cursor: pointer; border: none;" id="event'
@@ -758,7 +758,7 @@ export class ComputerComponent implements OnInit, AfterViewInit {
       };
       this.events.push(givenEvent);
 
-      const xShift = ((givenEvent.time * 6000) / this.memoryLength) + (10 * 6000 / this.memoryLength);
+      const xShift = ((givenEvent.time * 6000) / this.memoryLength) + (5 * 6000 / this.memoryLength);
       const htmlString: string = '<div style="background-color: ' + givenEvent.color
         + '; position: absolute; left: ' + xShift + '%; top: -100%; width: 0.75%; height: 300%; cursor: pointer; border: none;" id="event'
         + this.numIndicators + '" title="' + this.formatTime(givenEvent.time) + ' ' + givenEvent.message + '"></div>';
