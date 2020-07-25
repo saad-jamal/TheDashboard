@@ -21,7 +21,7 @@ import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-computer',
-  templateUrl: './computer.component.html',
+  templateUrl: './computer.component.html', 
   styleUrls: ['./computer.component.css']
 })
 /**

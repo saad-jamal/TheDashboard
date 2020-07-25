@@ -234,19 +234,20 @@
 #vidDiv {
     position: absolute;
     left: 0.25%;
-    top: 59%;
+    top: 60%;
 
     width: 24%;
-    height: 34.5%;
+    height: 33%;
 
-    border: 2px solid;
-    background: white;
+    border: none;
+    background: transparent;
     
     display: none;
 }
 
 video {
     width: 100%;
+    border: 2px solid;
 }
 
 /* Settings Div */
