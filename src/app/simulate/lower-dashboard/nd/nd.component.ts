@@ -213,7 +213,7 @@ export class NdComponent implements AfterViewInit {
       minY = 0;
     } else if (this.localMemory.pres_alt <= 2000) {
       maxY = 2000;
-      minY = 1000;
+      minY = 0;
     } else {
       minY = Math.floor(Math.min(...this.localMemory.VSD_terrain) / 2000) * 2000;
       maxY = Math.ceil(Math.max(this.localMemory.pres_alt, Math.max(...this.localMemory.VSD_terrain)) / 2000) * 2000;
