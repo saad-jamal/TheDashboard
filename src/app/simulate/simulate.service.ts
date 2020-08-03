@@ -4,7 +4,6 @@ import { Disk } from './interfaces/disk';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -30,7 +29,7 @@ export class SimulateService {
   }
 
   getSimulatorData(): Observable<any> {
-    return this.http.get('/assets/data/sim.json');
+    return this.http.get('assets/data/sim.json');
   }
 
   postEventIndicators(toPostJSON: any): Observable<any> {

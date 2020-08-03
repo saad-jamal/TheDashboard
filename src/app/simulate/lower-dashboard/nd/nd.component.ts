@@ -1,6 +1,7 @@
 import { NdSharingService } from './../../data-sharing/nd-sharing.service';
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { NdMemory } from './nd-memory';
+import { min } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nd',
@@ -73,7 +74,8 @@ export class NdComponent implements AfterViewInit {
       fo_bel_gs_lt: null,
 
       VSD_terrain: null,
-      pitch_angle: null,
+      rate_of_clb: null,
+      cal_as: null,
       pres_alt: null,
       mcp_alt_ds: null
     };
@@ -200,9 +202,23 @@ export class NdComponent implements AfterViewInit {
     this.foreCtx.lineWidth = 1;
     this.foreCtx.fillStyle = 'white';
 
-    const maxY = (Math.max(this.localMemory.pres_alt, Math.max(...this.localMemory.VSD_terrain)) + 1000)
-      - (this.localMemory.pres_alt % 1000);
-    const minY = 1000 * Math.floor(Math.min(...this.localMemory.VSD_terrain) / 1000);
+    // const maxY = (Math.max(this.localMemory.pres_alt, Math.max(...this.localMemory.VSD_terrain)) + 1000)
+    //   - (this.localMemory.pres_alt % 1000);
+    // const minY = 1000 * Math.floor(Math.min(...this.localMemory.VSD_terrain) / 1000);
+
+    let maxY: number;
+    let minY: number;
+    if (this.localMemory.pres_alt <= 1000) {
+      maxY = 1000;
+      minY = 0;
+    } else if (this.localMemory.pres_alt <= 2000) {
+      maxY = 2000;
+      minY = 1000;
+    } else {
+      minY = Math.floor(Math.min(...this.localMemory.VSD_terrain) / 2000) * 2000;
+      maxY = Math.ceil(Math.max(this.localMemory.pres_alt, Math.max(...this.localMemory.VSD_terrain)) / 2000) * 2000;
+    }
+
     const midY = (maxY + minY) / 2;
     const yAxis = [minY, midY, maxY];
 
@@ -295,8 +311,8 @@ export class NdComponent implements AfterViewInit {
     this.foreCtx.stroke();
 
     this.foreCtx.beginPath();
-    this.foreCtx.moveTo(airplaneX + (this.wUnit * 10), airplaneY)
-    const angle = (Math.PI / 180) * this.localMemory.pitch_angle;
+    this.foreCtx.moveTo(airplaneX + (this.wUnit * 10), airplaneY);
+    const angle = Math.atan(this.localMemory.rate_of_clb / (this.localMemory.cal_as * 101.269));
     const xShift = (180 * this.wUnit) * Math.cos(angle);
     const yShift = (180 * this.wUnit) * Math.sin(angle);
     this.foreCtx.lineTo(airplaneX + (this.wUnit * 10) + xShift, airplaneY - yShift);

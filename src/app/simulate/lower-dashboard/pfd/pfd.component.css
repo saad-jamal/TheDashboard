@@ -208,14 +208,15 @@ canvas {
 
 #fo_ap_stat {
     position: absolute;
-    left: 35%;
+    left: 18%;
     top: 13.5%;
 
-    width: 18%;
+    width: 52%;
     height: 8%;
 
-    font-size: 2.8vh;
+    font-size: 2.6vh;
     color: rgb(90, 252, 3);
+
 
     text-align: center;
 }

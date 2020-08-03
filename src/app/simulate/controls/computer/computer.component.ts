@@ -183,26 +183,46 @@ export class ComputerComponent implements OnInit, AfterViewInit {
 
     this.events = [];
     this.numIndicators = 0;
-}
 
-  ngOnInit(): void {
-    this.simService.getSimulatorData().subscribe(
-      (data) => this.rawMemory = data,
-      (err) => console.log(err),
-      () => this.handleData());
-
-    this.simService.getDiskInfo()
-    .subscribe(data => (this.diskInfo = data),
-      error => console.log(error),
-      () => {
-        this.vidSource = 'assets/video/' + this.diskInfo.videoName + '.mp4';
-        console.log('Video Loaded: ' + this.vidSource);
-    });
+    this.diskInfo = {
+      expirementName: 'Loading...',
+      videoName: 'Loading...'
+    };
   }
 
+  ngOnInit(): void {}
+
   ngAfterViewInit(): void {
-    this.vid.nativeElement.insertAdjacentHTML('beforeend', '<source src=\''
-    + this.vidSource + '\' type=\'video/mp4\'>');
+    // I'll be honest. The following is the ugliest code ever written.
+    this.simService.getSimulatorData().subscribe(
+      (data) => this.rawMemory = data,
+      (err) => {
+        console.log(err);
+        this.diskInfo = {
+          expirementName: 'N/A',
+          videoName: 'N/A'
+        };
+      }, () => {
+        this.handleData();
+
+        this.simService.getDiskInfo()
+        .subscribe(data => (this.diskInfo = data),
+          error => console.log(error),
+          () => {
+            if (this.diskInfo.expirementName === '') {
+              this.diskInfo.expirementName = 'N/A';
+            }
+
+            if (this.diskInfo.videoName === '') {
+              this.diskInfo.videoName = 'N/A';
+            } else {
+              this.vidSource = 'assets/video/' + this.diskInfo.videoName + '.mp4';
+              console.log('Video Loaded: ' + this.vidSource);
+              this.vid.nativeElement.insertAdjacentHTML('beforeend', '<source src=\''
+                + 'assets/video/vid.mp4' + '\' type=\'video/mp4\'>');
+            }
+        });
+      });
 
     this.simOffset.nativeElement.value = this.simOffsetVal.toFixed(2);
     this.vidOffset.nativeElement.value = this.vidOffsetVal.toFixed(2);
@@ -360,7 +380,6 @@ export class ComputerComponent implements OnInit, AfterViewInit {
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.events.length; i++) {
       const eventIndex = Math.floor(this.events[i].time * 60);
-      console.log(eventIndex - this.index);
       if ((eventIndex === this.index) || ((eventIndex + 1) === this.index) || ((eventIndex + 2) === this.index)) {
         this.vid.nativeElement.pause();
         this.runner = clearInterval(this.runner);
@@ -501,7 +520,8 @@ export class ComputerComponent implements OnInit, AfterViewInit {
       fo_bel_gs_lt: this.binary(this.rawMemory[this.index]['"fo_bel_gs_lt"']),
 
       VSD_terrain: this.terrainData(),
-      pitch_angle: this.formatNdDials(this.rawMemory[this.index]['"pitch_angle"']),
+      rate_of_clb: this.formatNdDials(this.rawMemory[this.index]['"rate_of_clb"']),
+      cal_as: this.formatNdDials(this.rawMemory[this.index]['"cal_as"']),
       pres_alt: this.formatNdDials(this.rawMemory[this.index]['"pres_alt"']),
       mcp_alt_ds: this.formatNdDials(this.rawMemory[this.index]['"mcp_alt_ds"'])
     };
@@ -723,7 +743,7 @@ export class ComputerComponent implements OnInit, AfterViewInit {
     };
     this.events.push(eventObject);
 
-    const xShift = ((eventObject.time * 6000) / this.memoryLength) + (5 * 6000 / this.memoryLength);
+    const xShift = (((eventObject.time * 6000) / this.memoryLength) + (0.7)) * (0.97666);
 
     const htmlString: string = '<div style="background-color: ' + eventObject.color
       + '; position: absolute; left: ' + xShift + '%; top: -100%; width: 0.75%; height: 300%; cursor: pointer; border: none;" id="event'
@@ -747,9 +767,11 @@ export class ComputerComponent implements OnInit, AfterViewInit {
 
   /* Initialize the events array. Add each div to HTML. */
   initializeEvents(jsonObj: any[]) {
+    console.log(jsonObj);
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < jsonObj.length; i++) {
-      const givenColor = (jsonObj[i] !== null) ? 'red' : jsonObj[i].color;
+      const givenColor = (jsonObj[i].color !== undefined) ? jsonObj[i].color : 'yellow';
+      console.log(givenColor);
       const givenEvent = {
         time: jsonObj[i].time,
         message: jsonObj[i].message,
@@ -758,7 +780,7 @@ export class ComputerComponent implements OnInit, AfterViewInit {
       };
       this.events.push(givenEvent);
 
-      const xShift = ((givenEvent.time * 6000) / this.memoryLength) + (5 * 6000 / this.memoryLength);
+      const xShift = (((givenEvent.time * 6000) / this.memoryLength) + (0.7)) * (0.97666);
       const htmlString: string = '<div style="background-color: ' + givenEvent.color
         + '; position: absolute; left: ' + xShift + '%; top: -100%; width: 0.75%; height: 300%; cursor: pointer; border: none;" id="event'
         + this.numIndicators + '" title="' + this.formatTime(givenEvent.time) + ' ' + givenEvent.message + '"></div>';

@@ -64,12 +64,13 @@ app.post('/event-upload', function(req, res) {
     if (sampleFile.name.slice(-4) !== '.csv') {
         return res.status(500).send("Must upload CSV files.");
     }
+    console.log("Uploading file: " + sampleFile.name);
     sampleFile.mv("src/assets/events/" + sampleFile.name, function(err) {
         if (err) {
             return res.status(500).send(err);
         }
-        console.log("Uploading file: " + sampleFile.name);
         res.redirect('http://localhost:4200/initialize');
+        console.log("Event markers successfully uploaded.");
     });
 });
 
@@ -100,6 +101,7 @@ app.post('/event-download', function(req, res) {
     
         fs.writeFile('src/assets/events/event_markers_' + simDataInfo.expirementName.slice(9) + '.csv', output, function(err) {
             if (err) throw err;
+            console.log('Event data sucessfully uploaded.');
         });
     
         res.sendStatus(200);
@@ -110,25 +112,28 @@ app.post('/event-download', function(req, res) {
 
 /** When client uploads video files to server it should be stored 
  *  in the assets/video folder. */
- app.post('/vid-upload', function(req, res) {
-     if (!req.files || Object.keys(req.files).length === 0) {
+app.post('/vid-upload', function(req, res) {
+    if (!req.files || Object.keys(req.files).length === 0) {
          return res.status(400).send('No files were uploaded.');
-     }
-     fs.emptyDirSync('src/assets/video');
-     let sampleFile = req.files.sampleFile;
-     videoName = req.files.sampleFile.name.slice(0, -4);
-     simDataInfo.videoName = videoName;
-     if (sampleFile.name.slice(-4) !== '.mp4') {
+    }
+    fs.emptyDirSync('src/assets/video');
+    let sampleFile = req.files.sampleFile;
+    videoName = req.files.sampleFile.name.slice(0, -4);
+    simDataInfo.videoName = videoName;
+    if (sampleFile.name.slice(-4) !== '.mp4') {
         return res.status(500).send("Must upload MP4 files.");
     }
-     sampleFile.mv("src/assets/video/" + simDataInfo.videoName + ".mp4", function(err) {
-         if (err) {
-             return res.status(500).send(err);
-         }
-         console.log("Uploading file: " + sampleFile.name);
-         res.redirect('http://localhost:4200/initialize');
-     });
- });
+
+    console.log("Uploading file: " + sampleFile.name);
+    sampleFile.mv("src/assets/video/vid.mp4", function(err) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.redirect('http://localhost:4200/initialize');
+        console.log("Video file successfully uploaded.");
+    });
+    fs.writeFile('src/assets/video/' + simDataInfo.videoName + '.txt', '\n');
+});
 
  /** When client loads simulate page, they should be informed of
   *  what data is pre-loaded in the app. */
@@ -142,7 +147,6 @@ app.post('/event-download', function(req, res) {
  app.get('/events', function(req, res) {
     if (!fs.existsSync('src/assets/events/event_markers_' + simDataInfo.expirementName.slice(9) + '.csv')) {
         console.log('No previously recorded events.');
-        console.log('src/assets/events/event_markers_' + simDataInfo.expirementName.slice(9) + '.csv');
         res.send([]);
     } else {
         let bufferString = fs.readFileSync('src/assets/events/event_markers_' + simDataInfo.expirementName.slice(9) + '.csv', 'utf8');
@@ -157,7 +161,7 @@ app.post('/event-download', function(req, res) {
             let obj = {};
             for (let j = 0; j < data.length; j++) {
                 if (headers[j].trim() === "color" && data[j].trim() === "") {
-                    obj[headers[j].trim()] = 'red';
+                    obj[headers[j].trim()] = 'yellow';
                 } else {
                     obj[headers[j].trim()] = data[j].trim();
                 }
@@ -186,7 +190,7 @@ if (!fs.existsSync('src/assets/data')) {
 /* We need to initially read all the files of data we have in order to
  * initialize the simDataInfo object. */
 fs.readdir('src/assets/data', function(err, files) {
-	for (i = 0; i < files.length; i++) {
+    for (i = 0; i < files.length; i++) {
 		if (files[i].slice(-4) == ".csv") {
 			simDataInfo.expirementName = files[i].slice(0,-4);
 		}
@@ -199,7 +203,7 @@ if (!fs.existsSync('src/assets/video')) {
 
 fs.readdir('src/assets/video', function(err, files) {
 	for (i = 0; i < files.length; i++) {
-		if (files[i].slice(-4) == ".mp4") {
+		if (files[i].slice(-4) == ".txt") {
 			simDataInfo.videoName = files[i].slice(0,-4);
 		}
 	}
@@ -241,7 +245,7 @@ function csvHandler(fileName) {
         outputStream.on(
             "finish",
             function handleFinish() {
-                console.log("Input data sucessfully parsed.");
+                console.log("Input data successfully parsed.");
             }
         );
     })

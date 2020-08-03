@@ -33,7 +33,8 @@ export class NdSharingService {
       fo_bel_gs_lt: null,
 
       VSD_terrain: null,
-      pitch_angle: null,
+      rate_of_clb: null,
+      cal_as: null,
       pres_alt: null,
       mcp_alt_ds: null
     });
