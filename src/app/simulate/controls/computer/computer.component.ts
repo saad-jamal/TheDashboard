@@ -159,6 +159,7 @@ export class ComputerComponent implements OnInit, AfterViewInit {
               private offAoISharingService: OffAoiSharingService,
               @Inject(DOCUMENT) document,
               private http: HttpClient) {
+    this.rawMemory = [];
     this.playing = false;
     this.simSpeed = 50; // A frequency of 20 hertz.
     this.elapsedSeconds = 0;
