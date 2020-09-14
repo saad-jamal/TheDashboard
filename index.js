@@ -101,7 +101,7 @@ app.post('/event-download', function(req, res) {
     
         fs.writeFile('src/assets/events/event_markers_' + simDataInfo.expirementName.slice(9) + '.csv', output, function(err) {
             if (err) throw err;
-            console.log('Event data sucessfully uploaded.');
+            console.log('Event data sucessfully downloaded.');
         });
     
         res.sendStatus(200);

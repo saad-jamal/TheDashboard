@@ -204,7 +204,9 @@ export class ComputerComponent implements OnInit, AfterViewInit {
           videoName: 'N/A'
         };
       }, () => {
+        console.log(this.rawMemory); // RANDY FIX
         this.handleData();
+        console.log(this.rawMemory[0]); // RANDY FIX
 
         this.simService.getDiskInfo()
         .subscribe(data => (this.diskInfo = data),
@@ -291,6 +293,7 @@ export class ComputerComponent implements OnInit, AfterViewInit {
       this.noDataSharingService.changeMemory(false);
 
       this.previousObject = 0;
+      drawFixation = true;
     } else if (memoryObject.confidence <  0.85) {
       console.log('Pilot is viewing: No Data');
       this.offAoISharingService.changeMemory(false);
@@ -308,9 +311,9 @@ export class ComputerComponent implements OnInit, AfterViewInit {
     }
 
     if (this.index > 3) {
-      drawFixation = (this.parseEyeData(this.rawMemory[this.index]['"saccade"']) === 0)
+      drawFixation = drawFixation || ((this.parseEyeData(this.rawMemory[this.index]['"saccade"']) === 0)
         && ((this.parseEyeData(this.rawMemory[this.index - 1]['"saccade"']) === 1)
-          || (this.parseEyeData(this.rawMemory[this.index - 2]['"saccade"']) === 1));
+          || (this.parseEyeData(this.rawMemory[this.index - 2]['"saccade"']) === 1)));
     }
 
     if (this.previousObject !== memoryObject.object_being_viewed) {
@@ -768,7 +771,6 @@ export class ComputerComponent implements OnInit, AfterViewInit {
 
   /* Initialize the events array. Add each div to HTML. */
   initializeEvents(jsonObj: any[]) {
-    console.log(jsonObj);
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < jsonObj.length; i++) {
       const givenColor = (jsonObj[i].color !== undefined) ? jsonObj[i].color : 'yellow';
