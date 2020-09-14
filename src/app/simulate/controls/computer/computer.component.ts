@@ -204,9 +204,7 @@ export class ComputerComponent implements OnInit, AfterViewInit {
           videoName: 'N/A'
         };
       }, () => {
-        console.log(this.rawMemory); // RANDY FIX
         this.handleData();
-        console.log(this.rawMemory[0]); // RANDY FIX
 
         this.simService.getDiskInfo()
         .subscribe(data => (this.diskInfo = data),
