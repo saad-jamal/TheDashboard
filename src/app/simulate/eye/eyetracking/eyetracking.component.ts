@@ -128,6 +128,8 @@ export class EyetrackingComponent implements AfterViewInit {
 
     if (newFixation.id !== 0 && this.localMemory.confidence >= 0.85) {
       this.queue.push(newFixation);
+      console.log('Pilot is viewing: %s (' + newFixation.x + ', ' + newFixation.y + ')',
+        this.getAoIString(newFixation.id));
     }
 
     if (this.queue.length > 5) {
@@ -259,6 +261,27 @@ export class EyetrackingComponent implements AfterViewInit {
       return this.mcpLoc.y;
     } else if (id === 1010) {
       return this.lowerEicasLoc.y;
+    }
+  }
+
+  /* Function that gets component name from id. */
+  getAoIString(id: number): string {
+    if (id === 1003) {
+      return 'PFD';
+    } else if (id === 1004) {
+      return 'ND';
+    } else if (id === 1005) {
+      return 'OTW';
+    } else if (id === 1006) {
+      return 'Upper EICAS';
+    } else if (id === 1007) {
+      return 'EFIS';
+    } else if (id === 1008) {
+      return 'FMS';
+    } else if (id === 1009) {
+      return 'MCP';
+    } else if (id === 1010) {
+      return 'Lower EICAS';
     }
   }
 

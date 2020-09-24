@@ -286,14 +286,14 @@ export class ComputerComponent implements OnInit, AfterViewInit {
     let drawFixation = false;
 
     if (memoryObject.object_being_viewed === 0) {
-      console.log('Pilot is viewing: Off AoI');
+      console.log('Pilot is viewing: Off AoI.');
       this.offAoISharingService.changeMemory(true);
       this.noDataSharingService.changeMemory(false);
 
       this.previousObject = 0;
       drawFixation = true;
     } else if (memoryObject.confidence <  0.85) {
-      console.log('Pilot is viewing: No Data');
+      console.log('Pilot is viewing: No Data.');
       this.offAoISharingService.changeMemory(false);
       this.noDataSharingService.changeMemory(true);
 

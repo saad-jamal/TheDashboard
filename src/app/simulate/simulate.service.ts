@@ -37,7 +37,7 @@ export class SimulateService {
   }
 
   getEventIdicators(): Observable<any> {
-    return this.http.get('http://localhost:4201/events')
+    return this.http.get('http://localhost:4201/events');
   }
 
 }
