@@ -273,6 +273,29 @@ export class ComputerComponent implements OnInit, AfterViewInit {
     this.eyeSharingService.changeMemory(memoryObject);
   }
 
+  /* Function that gets component name from id. */
+  getAoIString(id: number): string {
+    if (id === 1003) {
+      return 'PFD';
+    } else if (id === 1004) {
+      return 'ND';
+    } else if (id === 1005) {
+      return 'OTW';
+    } else if (id === 1006) {
+      return 'Upper EICAS';
+    } else if (id === 1007) {
+      return 'EFIS';
+    } else if (id === 1008) {
+      return 'FMS';
+    } else if (id === 1009) {
+      return 'MCP';
+    } else if (id === 1010) {
+      return 'Lower EICAS';
+    } else {
+      return '';
+    }
+  }
+
   /* Function that handles sending eye-tracking data to Eye component. */
   enterEyetracking(): void {
     const memoryObject: EyeMemory = {
@@ -286,14 +309,14 @@ export class ComputerComponent implements OnInit, AfterViewInit {
     let drawFixation = false;
 
     if (memoryObject.object_being_viewed === 0) {
-      console.log('Pilot is viewing: Off AoI.');
+      console.log('%s : Off AoI.', this.realTime.split(' ')[1].slice(0, -1));
       this.offAoISharingService.changeMemory(true);
       this.noDataSharingService.changeMemory(false);
 
       this.previousObject = 0;
       drawFixation = true;
     } else if (memoryObject.confidence <  0.85) {
-      console.log('Pilot is viewing: No Data.');
+      console.log('%s : No Data.', this.realTime.split(' ')[1].slice(0, -1));
       this.offAoISharingService.changeMemory(false);
       this.noDataSharingService.changeMemory(true);
 
@@ -302,6 +325,9 @@ export class ComputerComponent implements OnInit, AfterViewInit {
       this.offAoISharingService.changeMemory(false);
       this.noDataSharingService.changeMemory(false);
       this.hold = this.index;
+
+      console.log('%s : %s (' + memoryObject.x + ', '
+      + memoryObject.y + ')', this.realTime.split(' ')[1].slice(0, -1), this.getAoIString(memoryObject.object_being_viewed));
     }
 
     if (this.index - this.hold > 185) {

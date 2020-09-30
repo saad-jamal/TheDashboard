@@ -128,8 +128,6 @@ export class EyetrackingComponent implements AfterViewInit {
 
     if (newFixation.id !== 0 && this.localMemory.confidence >= 0.85) {
       this.queue.push(newFixation);
-      console.log('Pilot is viewing: %s (' + newFixation.x + ', ' + newFixation.y + ')',
-        this.getAoIString(newFixation.id));
     }
 
     if (this.queue.length > 5) {
