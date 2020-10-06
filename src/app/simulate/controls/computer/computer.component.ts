@@ -302,7 +302,7 @@ export class ComputerComponent implements OnInit, AfterViewInit {
       object_being_viewed: this.parseEyeData(this.rawMemory[this.index]['"PGaze_Object_ID"']),
       confidence: this.parseEyeData(this.rawMemory[this.index]['"Gaze_Confidence"']),
       x: this.parseEyeData(this.rawMemory[this.index]['"PGaze_X_Intersection"']),
-      y: this.parseEyeData(this.rawMemory[this.index]['"PGaze_Y_Intersection"']),
+      y: 1 - this.parseEyeData(this.rawMemory[this.index]['"PGaze_Y_Intersection"']),
       empty_queue: false
     };
 
@@ -327,7 +327,7 @@ export class ComputerComponent implements OnInit, AfterViewInit {
       this.hold = this.index;
 
       console.log('%s : %s (' + memoryObject.x + ', '
-      + memoryObject.y + ')', this.realTime.split(' ')[1].slice(0, -1), this.getAoIString(memoryObject.object_being_viewed));
+      + (1 - memoryObject.y) + ')', this.realTime.split(' ')[1].slice(0, -1), this.getAoIString(memoryObject.object_being_viewed));
     }
 
     if (this.index - this.hold > 185) {
