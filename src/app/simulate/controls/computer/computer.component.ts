@@ -309,14 +309,12 @@ export class ComputerComponent implements OnInit, AfterViewInit {
     let drawFixation = false;
 
     if (memoryObject.object_being_viewed === 0) {
-      console.log('%s : Off AoI.', this.realTime.split(' ')[1].slice(0, -1));
       this.offAoISharingService.changeMemory(true);
       this.noDataSharingService.changeMemory(false);
 
       this.previousObject = 0;
       drawFixation = true;
     } else if (memoryObject.confidence <  0.85) {
-      console.log('%s : No Data.', this.realTime.split(' ')[1].slice(0, -1));
       this.offAoISharingService.changeMemory(false);
       this.noDataSharingService.changeMemory(true);
 
@@ -325,9 +323,6 @@ export class ComputerComponent implements OnInit, AfterViewInit {
       this.offAoISharingService.changeMemory(false);
       this.noDataSharingService.changeMemory(false);
       this.hold = this.index;
-
-      console.log('%s : %s (' + memoryObject.x + ', '
-      + (1 - memoryObject.y) + ')', this.realTime.split(' ')[1].slice(0, -1), this.getAoIString(memoryObject.object_being_viewed));
     }
 
     if (this.index - this.hold > 185) {
@@ -349,6 +344,14 @@ export class ComputerComponent implements OnInit, AfterViewInit {
     }
 
     if (drawFixation) {
+      if (memoryObject.object_being_viewed === 0) {
+        console.log('%s : Off AoI.', this.realTime.split(' ')[1].slice(0, -1));
+      } else if (memoryObject.confidence < 0.85) {
+        console.log('%s : No Data.', this.realTime.split(' ')[1].slice(0, -1));
+      } else {
+        console.log('%s : %s (' + memoryObject.x + ', '
+        + (1 - memoryObject.y) + ')', this.realTime.split(' ')[1].slice(0, -1), this.getAoIString(memoryObject.object_being_viewed));  
+      }
       this.previousObject = memoryObject.object_being_viewed;
       this.eyeSharingService.changeMemory(memoryObject);
     }
