@@ -136,22 +136,6 @@ export class EyetrackingComponent implements AfterViewInit {
     }
 
     this.drawTrackers();
-
-    // FIX ME
-    this.eyeCtx.strokeStyle = 'red';
-    this.eyeCtx.beginPath();
-    this.eyeCtx.arc(this.pfdLoc.x, this.pfdLoc.y, 5, 0, 2 * Math.PI);
-    this.eyeCtx.stroke();
-
-    this.eyeCtx.strokeStyle = 'red';
-    this.eyeCtx.beginPath();
-    this.eyeCtx.arc(this.pfdLoc.x + this.pfdLoc.wid, this.pfdLoc.y + this.pfdLoc.hei, 5, 0, 2 * Math.PI);
-    this.eyeCtx.stroke();
-
-    this.eyeCtx.strokeStyle = 'red';
-    this.eyeCtx.beginPath();
-    this.eyeCtx.arc(this.pfdLoc.x + this.pfdLoc.wid, this.pfdLoc.y + this.pfdLoc.hei, 5, 0, 2 * Math.PI);
-    this.eyeCtx.stroke();
   }
 
   /* Function that draws the trackers from the queue. */
