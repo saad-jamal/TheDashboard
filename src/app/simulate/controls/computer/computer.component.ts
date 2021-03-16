@@ -196,7 +196,7 @@ export class ComputerComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // I'll be honest. The following is the ugliest code ever written.
     this.simService.getSimulatorData().subscribe(
-      (data) => this.rawMemory = data,
+      (data) => {this.rawMemory = data; console.log(data);},
       (err) => {
         console.log(err);
         this.diskInfo = {
@@ -204,6 +204,7 @@ export class ComputerComponent implements OnInit, AfterViewInit {
           videoName: 'N/A'
         };
       }, () => {
+        console.log(this.rawMemory);
         this.handleData();
 
         this.simService.getDiskInfo()
